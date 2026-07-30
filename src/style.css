@@ -242,15 +242,47 @@ a:focus-visible::before {
   gap: clamp(1.25rem, 4vw, 3.5rem);
 }
 
-.topbar__place::before {
+.topbar__place--mobile::before {
   content: "";
   display: inline-block;
   width: 0.55em;
   height: 0.55em;
   margin-right: 0.7em;
   border-radius: 50%;
-  background: var(--ink);
+  background: var(--accent);
   vertical-align: 6%;
+}
+
+.topbar__place--desktop {
+  display: none;
+}
+
+@media (min-width: 761px) {
+  .topbar__place--mobile {
+    display: none;
+  }
+
+  .topbar__place--desktop {
+    display: inline;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.76rem;
+  }
+
+  .topbar__place--desktop::before {
+    content: "";
+    display: inline-block;
+    width: 0.55em;
+    height: 0.55em;
+    margin-right: 0.7em;
+    border-radius: 50%;
+    background: var(--accent);
+    vertical-align: 6%;
+  }
+
+  .topbar__coords {
+    display: none;
+  }
 }
 
 .topbar__nav ul {
@@ -359,7 +391,7 @@ html[data-menu="open"] .menu__item a {
   min-height: 100svh;
   display: flex;
   flex-direction: column;
-  padding: 5.25rem var(--px) 1.5rem;
+  padding: 5.25rem var(--px) 0;
 }
 
 .hero__title {
@@ -445,6 +477,12 @@ html[data-menu="open"] .menu__item a {
   animation: fade-up 600ms ease var(--t-district) both;
 }
 
+@media (min-width: 761px) {
+  .hero__district {
+    display: none;
+  }
+}
+
 .hero__frame {
   position: relative;
   overflow: hidden;
@@ -471,36 +509,125 @@ html[data-menu="open"] .menu__item a {
   animation: window-open 1000ms var(--ease-reveal) var(--t-window) both;
 }
 
-.hero__scroll {
-  padding-top: 1.75rem;
-  text-align: center;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+.hero__ticker {
+  display: block;
+  width: 100vw;
+  margin-top: auto;
+  margin-left: calc(50% - 50vw);
+  padding: 1rem 0;
+  min-height: 3.25rem;
+  background: var(--accent);
+  color: #04211e;
+  overflow: hidden;
+  overflow: clip;
+  text-decoration: none;
+  cursor: pointer;
   animation: fade-in 800ms ease var(--t-scroll) both;
 }
 
-/* ---------- Manifest (dunkel, Zeilen von der Seite) ---------- */
+.hero__ticker-track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  min-height: 1.25rem;
+  white-space: nowrap;
+  font-size: clamp(0.82rem, 1.35vw, 1rem);
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  animation: marquee 40s linear infinite;
+}
+
+.hero__ticker-track > span {
+  display: block;
+  flex-shrink: 0;
+  padding-right: 3rem;
+}
+
+.hero__ticker:hover .hero__ticker-track {
+  animation-play-state: paused;
+}
+
+/* ---------- Manifest (türkis, Zeilen mit Wipe-Hintergrund) ---------- */
 .manifest {
-  padding: clamp(7rem, 15vw, 12rem) var(--px);
+  padding: clamp(4.5rem, 9vw, 7.5rem) var(--px);
+  background: var(--accent);
+  color: var(--ink);
 }
 
 .manifest__statement {
-  display: grid;
-  row-gap: clamp(0.5rem, 1.5vw, 1.25rem);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(0.35rem, 1.2vw, 0.85rem);
 }
 
 .manifest__line {
-  font-family: var(--font-display);
-  font-size: clamp(2.8rem, 9vw, 10rem);
-  line-height: 0.98;
-  text-transform: uppercase;
-  letter-spacing: -0.01em;
+  position: relative;
+  display: block;
+  overflow: visible;
+  width: fit-content;
+  max-width: 100%;
 }
 
-.manifest__line--2 { text-align: right; }
-.manifest__line--3 { text-align: center; color: var(--accent); }
+.manifest__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  transform: scaleX(0);
+  transform-origin: left center;
+  will-change: transform;
+  border-radius: 1px;
+}
+
+.manifest__line--1 .manifest__bg,
+.manifest__line--2 .manifest__bg {
+  background: #fff;
+}
+
+.manifest__line--3 .manifest__bg {
+  background: var(--ink);
+}
+
+.manifest__label {
+  position: relative;
+  z-index: 1;
+  display: block;
+  padding: 0.18em 0.34em 0.12em;
+  font-family: var(--font-display);
+  font-size: clamp(3.4rem, 11.5vw, 12rem);
+  line-height: 1.08;
+  text-transform: uppercase;
+  letter-spacing: -0.012em;
+}
+
+.manifest__line--1 .manifest__label,
+.manifest__line--2 .manifest__label {
+  color: var(--ink);
+}
+
+.manifest__line--3 .manifest__label {
+  color: #fff;
+}
+
+/* Untereinander, nur auf der X-Achse versetzt */
+.manifest__line--1 {
+  margin-left: 0;
+}
+
+.manifest__line--2 {
+  margin-left: clamp(1.25rem, 12vw, 10rem);
+}
+
+.manifest__line--3 {
+  margin-left: clamp(2.5rem, 38vw, 34rem);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .manifest__bg {
+    transform: scaleX(1);
+  }
+}
 
 /* ---------- Statement (Wort-für-Wort-Reveal, Sunny-Stil) ---------- */
 .statement {
@@ -695,7 +822,7 @@ html[data-menu="open"] .menu__item a {
   width: 100%;
   border-radius: var(--radius);
   aspect-ratio: 4 / 3.3;
-  background: var(--card-bg);
+  background: #fff;
 }
 
 .bento__frame img {
@@ -704,15 +831,29 @@ html[data-menu="open"] .menu__item a {
   object-fit: cover;
   object-position: center;
   display: block;
+  transform-origin: center;
 }
 
-.bento__curtain {
+.bento__frame:not(.is-open) img {
+  transform: scale(1.14);
+}
+
+.bento__frame::after {
+  content: "";
   position: absolute;
   inset: -1px;
   z-index: 1;
-  background: var(--card-bg);
-  transform-origin: 50% 0%;
+  background: var(--bg);
+  transform-origin: top;
   pointer-events: none;
+}
+
+.bento__frame.is-open::after {
+  animation: window-open 1000ms var(--ease-reveal) both;
+}
+
+.bento__frame.is-open img {
+  animation: img-settle 1300ms var(--ease-lift) both;
 }
 
 .card__chip {
@@ -1113,22 +1254,26 @@ html[data-menu="open"] .menu__item a {
     position: absolute;
     left: var(--gx, 0);
     top: var(--gy, 0);
-    width: var(--gw, clamp(260px, 24vw, 420px));
+    width: var(--gw, clamp(190px, 18vw, 320px));
     z-index: var(--gz, 1);
   }
 
   .gallery__ph--tall {
-    width: clamp(230px, 21vw, 380px);
+    width: clamp(170px, 16vw, 290px);
   }
 
   .gallery__ph--wide {
-    width: clamp(320px, 32vw, 520px);
+    width: clamp(260px, 26vw, 440px);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .bento__curtain {
+  .bento__frame::after {
     display: none;
+  }
+
+  .bento__frame:not(.is-open) img {
+    transform: none;
   }
 }
 
@@ -1514,6 +1659,19 @@ html[data-menu="open"] .menu__item a {
   .hero__figure {
     grid-column: 1;
     grid-row: 1;
+  }
+
+  .manifest__label {
+    font-size: clamp(2.75rem, 15vw, 5rem);
+    padding-top: 0.22em;
+  }
+
+  .manifest__line--2 {
+    margin-left: clamp(0.75rem, 9vw, 2.75rem);
+  }
+
+  .manifest__line--3 {
+    margin-left: clamp(1.5rem, 26vw, 9rem);
   }
 
   .hero__tagline {

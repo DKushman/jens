@@ -15,7 +15,6 @@ import { CustomEase } from 'gsap/CustomEase';
 
 gsap.registerPlugin(ScrollTrigger, CustomEase);
 CustomEase.create('reveal', 'M0,0 C0.77,0 0.175,1 1,1');
-CustomEase.create('windowDown', 'M0,0 C0.23,0 0.77,1 1,1');
 ScrollTrigger.config({ limitCallbacks: true });
 
 /* ---------- Wahlkreis-Karte: Tap/Klick öffnet Bild am Punkt ---------- */
@@ -78,6 +77,16 @@ const once = (trigger, start = 'top 90%') => ({
 const inBento = (el) => el.closest('.bento');
 
 mm.add('(prefers-reduced-motion: no-preference)', () => {
+  /* Manifest: Hintergrund wischt von links nach rechts (nur transform) */
+  $$('.manifest__line').forEach((line, i) => {
+    const bg = line.querySelector('.manifest__bg');
+    if (!bg) return;
+    gsap.fromTo(bg,
+      { scaleX: 0, transformOrigin: 'left center' },
+      { scaleX: 1, duration: 0.85, ease: 'reveal', delay: i * 0.12,
+        scrollTrigger: once(line, 'top 88%') });
+  });
+
   $$('.reveal:not(.reveal--left):not(.reveal--right):not(.reveal--words):not(.reveal--sig):not(.reveal--spot)')
     .filter((el) => !inBento(el))
     .forEach((el) => {
@@ -160,13 +169,14 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
     }
   }
 
-  /* Fenster-Reveal: Vorhang von oben – Bild bleibt unverzerrt */
-  $$('.bento__curtain').forEach((curtain) => {
-    const frame = curtain.closest('.bento__frame');
-    gsap.fromTo(curtain,
-      { scaleY: 1, transformOrigin: '50% 0%' },
-      { scaleY: 0, duration: 0.72, ease: 'windowDown',
-        scrollTrigger: once(frame, 'top 92%') });
+  /* Bento: exakt wie Hero (window-open + img-settle), scroll-getriggert */
+  $$('.bento__frame').forEach((frame) => {
+    ScrollTrigger.create({
+      trigger: frame,
+      start: 'top 92%',
+      once: true,
+      onEnter: () => frame.classList.add('is-open'),
+    });
   });
 
   $$('.slab:not(.goals)').forEach((section) => {
@@ -237,15 +247,15 @@ function initGalleryScrub() {
   const flyTl = gsap.timeline({
     scrollTrigger: {
       trigger: gallerySection,
-      start: 'top 68%',
-      end: 'top 18%',
+      start: 'top 78%',
+      end: 'top 6%',
       scrub: true,
       invalidateOnRefresh: true,
     },
   });
 
   galleryItems.forEach((ph, i) => {
-    flyTl.to(ph, { x: 0, autoAlpha: 1, ease: 'none', duration: 0.1 }, 0.08 + i * 0.012);
+    flyTl.to(ph, { x: 0, autoAlpha: 1, ease: 'none', duration: 0.1 }, 0.2 + i * 0.024);
   });
 
   ScrollTrigger.addEventListener('refreshInit', applyFrom);

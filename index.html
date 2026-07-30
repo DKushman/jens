@@ -23,7 +23,8 @@
     <div class="site">
       <header class="topbar">
         <p class="topbar__meta">
-          <span class="topbar__place">Berlin, DE</span>
+          <span class="topbar__place topbar__place--mobile">Berlin, DE</span>
+          <span class="topbar__place topbar__place--desktop">Lichterfelde West und Zehlendorf Süd</span>
           <span class="topbar__coords">52.4333° N, 13.2911° O</span>
         </p>
 
@@ -65,7 +66,7 @@
           <div class="hero__stage">
             <p class="hero__tagline">
               <span class="mask tagline tagline--left"><span class="line">Ihr Kandidat</span></span>
-              <span class="mask tagline tagline--right"><span class="line">im Wahlkreis&nbsp;3</span></span>
+              <span class="mask tagline tagline--right"><span class="line">Wahlkreis&nbsp;3</span></span>
             </p>
 
             <figure class="hero__figure">
@@ -76,15 +77,31 @@
             </figure>
           </div>
 
-          <p class="hero__scroll">Nach unten scrollen</p>
+          <a class="hero__ticker" href="#wahl" aria-label="Zur Kandidatur – Ich kandidiere zum Abgeordnetenhaus">
+            <span class="hero__ticker-track" aria-hidden="true">
+              <span>Ich kandidiere zum Abgeordnetenhaus · Wahlkreis 3 · 20. September 2026 · </span>
+              <span>Ich kandidiere zum Abgeordnetenhaus · Wahlkreis 3 · 20. September 2026 · </span>
+              <span>Ich kandidiere zum Abgeordnetenhaus · Wahlkreis 3 · 20. September 2026 · </span>
+              <span>Ich kandidiere zum Abgeordnetenhaus · Wahlkreis 3 · 20. September 2026 · </span>
+            </span>
+          </a>
         </section>
 
-        <section class="manifest theme-dark cv" aria-labelledby="manifest-title">
+        <section class="manifest cv" aria-labelledby="manifest-title">
           <h2 id="manifest-title" class="sr-only">Mein Ansatz</h2>
           <p class="manifest__statement">
-            <span class="manifest__line manifest__line--1 reveal reveal--left">Zuhören.</span>
-            <span class="manifest__line manifest__line--2 reveal reveal--right">Verstehen.</span>
-            <span class="manifest__line manifest__line--3 reveal reveal--left">Handeln.</span>
+            <span class="manifest__line manifest__line--1">
+              <span class="manifest__bg" aria-hidden="true"></span>
+              <span class="manifest__label">Zuhören.</span>
+            </span>
+            <span class="manifest__line manifest__line--2">
+              <span class="manifest__bg" aria-hidden="true"></span>
+              <span class="manifest__label">Verstehen.</span>
+            </span>
+            <span class="manifest__line manifest__line--3">
+              <span class="manifest__bg" aria-hidden="true"></span>
+              <span class="manifest__label">Handeln.</span>
+            </span>
           </p>
         </section>
 
@@ -143,7 +160,6 @@
               <article class="card card--photo">
                 <div class="bento__frame">
                   <img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_900/v1785430102/85A020F1-02AB-4FE5-94AE-F53D5EE585A8-photo-output_z2z8o4" alt="Im Gespräch – Bundesadler" width="960" height="1280" loading="lazy" decoding="async" />
-                  <span class="bento__curtain" aria-hidden="true"></span>
                 </div>
                 <p class="card__chip">Im Kiez zu Hause</p>
               </article>
@@ -176,7 +192,6 @@
               <article class="card card--photo">
                 <div class="bento__frame">
                   <img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_900/v1785430109/4A3E074E-2400-4255-AA19-CC462F869E44-IMG_7072_mkgcov" alt="Skatspieler mit Freund" width="1280" height="960" loading="lazy" decoding="async" />
-                  <span class="bento__curtain" aria-hidden="true"></span>
                 </div>
                 <p class="card__chip">Skatspieler &amp; Bücherfreund</p>
               </article>
@@ -325,18 +340,24 @@
           </div>
 
           <div class="gallery__canvas" id="gallery">
-            <figure class="gallery__ph" style="--gx: 1%; --gy: 2%; --gr: -10deg; --gw: clamp(260px, 24vw, 420px); --gz: 3" data-from="left"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/5B197304-60CA-4D7E-AEB7-FB71F437694D-Frau_Bindel_und_Herr_Hoffmann_fern_c7twan" alt="Wahlkampf im Kiez" width="960" height="1280" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph gallery__ph--tall" style="--gx: 62%; --gy: 0%; --gr: -5deg; --gz: 6" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/728F376D-6B27-4E46-B31F-4DB22703B40F-IMG_8849_gfkyx0" alt="Im Gespräch mit Nachbarinnen und Nachbarn" width="900" height="1280" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph" style="--gx: 0%; --gy: 24%; --gr: 7deg; --gw: clamp(270px, 25vw, 440px); --gz: 2" data-from="left"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/5079125F-06A7-4C0A-9B18-40DFCCC0FFB4-IMG_6489_t9seca" alt="Unterwegs im Kiez" width="960" height="1280" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph" style="--gx: 58%; --gy: 20%; --gr: 9deg; --gw: clamp(250px, 23vw, 400px); --gz: 5" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/98FC50C5-D708-4033-918F-14CD8E5B1FAF-IMG_6973_cfejfr" alt="Im Bäkepark" width="1280" height="960" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph gallery__ph--wide" style="--gx: 8%; --gy: 42%; --gr: -3deg; --gz: 8" data-from="left"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_900/FA676B7E-D2AD-4F59-BAD5-211D4EC4E2D9-6c074e56-5c3a-4c46-846e-56ccc255e93a_iuqyym" alt="Lichterfelde West" width="1280" height="808" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph gallery__ph--tall" style="--gx: 54%; --gy: 38%; --gr: -8deg; --gz: 1" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/0575CFA6-38FE-40E9-8E19-E26D8033AEAC-IMG_8400_ggdx4i" alt="Porträt von Jens Hoffmann" width="800" height="1280" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph" style="--gx: 2%; --gy: 56%; --gr: 4deg; --gw: clamp(260px, 24vw, 420px); --gz: 7" data-from="left"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/74F6BB4F-EF69-49C6-B307-6F24BE39439F-IMG_8181_wbo1y1" alt="Schönower Park" width="960" height="1280" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph" style="--gx: 50%; --gy: 52%; --gr: -6deg; --gw: clamp(250px, 23vw, 400px); --gz: 4" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/232AE707-4039-4E66-95F8-084C0EC076AB-IMG_9056_kewllt" alt="Am Teltowkanal" width="960" height="1280" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph" style="--gx: 16%; --gy: 68%; --gr: -7deg; --gw: clamp(240px, 22vw, 380px); --gz: 9" data-from="left"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/38A1E6C6-7C85-451C-8A24-458BF667255D-IMG_1128_g7ry0k" alt="Skatabend" width="960" height="1280" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph gallery__ph--wide" style="--gx: 40%; --gy: 62%; --gr: 3deg; --gz: 3" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_1600/CCD593F3-5A9B-4F39-BFC3-C01B3EC3DC7E-IMG_1711_ssj2fj" alt="Zehlendorf Süd" width="1280" height="720" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph" style="--gx: 4%; --gy: 38%; --gr: 6deg; --gw: clamp(230px, 21vw, 360px); --gz: 2" data-from="left"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/D8762E4B-5AD3-4BC6-AFAE-16D30DA9DB7D-IMG_5990_bsrehw" alt="Schweizer Viertel" width="960" height="1280" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph" style="--gx: 66%; --gy: 66%; --gr: 8deg; --gw: clamp(220px, 20vw, 340px); --gz: 10" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/BACC6B3C-8301-4707-AE55-DC38E83E664F-IMG_6169_m4ynd5" alt="Wahlkampf am Bahnhof" width="960" height="1280" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__ph" style="--gx: 3%; --gy: 2%; --gr: -12deg; --gw: clamp(175px, 16vw, 295px); --gz: 2" data-from="left"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/5B197304-60CA-4D7E-AEB7-FB71F437694D-Frau_Bindel_und_Herr_Hoffmann_fern_c7twan" alt="Wahlkampf im Kiez" width="960" height="1280" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__ph gallery__ph--tall" style="--gx: 72%; --gy: 1%; --gr: 8deg; --gz: 5" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/728F376D-6B27-4E46-B31F-4DB22703B40F-IMG_8849_gfkyx0" alt="Im Gespräch mit Nachbarinnen und Nachbarn" width="900" height="1280" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__ph gallery__ph--wide" style="--gx: 28%; --gy: 4%; --gr: -3deg; --gz: 4" data-from="left"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_900/FA676B7E-D2AD-4F59-BAD5-211D4EC4E2D9-6c074e56-5c3a-4c46-846e-56ccc255e93a_iuqyym" alt="Lichterfelde West" width="1280" height="808" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__ph" style="--gx: 58%; --gy: 6%; --gr: -7deg; --gw: clamp(170px, 15vw, 280px); --gz: 6" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/98FC50C5-D708-4033-918F-14CD8E5B1FAF-IMG_6973_cfejfr" alt="Im Bäkepark" width="1280" height="960" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__ph" style="--gx: 6%; --gy: 18%; --gr: 9deg; --gw: clamp(180px, 16vw, 300px); --gz: 3" data-from="left"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/5079125F-06A7-4C0A-9B18-40DFCCC0FFB4-IMG_6489_t9seca" alt="Unterwegs im Kiez" width="960" height="1280" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__ph" style="--gx: 38%; --gy: 16%; --gr: -5deg; --gw: clamp(175px, 16vw, 290px); --gz: 7" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/749026CA-224D-4556-B810-8CA3AC6C7F67-IMG_3035_vm1n0n" alt="Schweizer Viertel" width="1098" height="960" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__ph gallery__ph--tall" style="--gx: 68%; --gy: 20%; --gr: -10deg; --gz: 1" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/0575CFA6-38FE-40E9-8E19-E26D8033AEAC-IMG_8400_ggdx4i" alt="Porträt von Jens Hoffmann" width="800" height="1280" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__ph" style="--gx: 22%; --gy: 32%; --gr: 6deg; --gw: clamp(170px, 15vw, 285px); --gz: 8" data-from="left"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/9ADC206A-EE6A-4212-85F7-6124854D5C05-IMG_7672_olamfx" alt="Unterwegs im Kiez" width="960" height="1280" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__ph" style="--gx: 52%; --gy: 30%; --gr: -8deg; --gw: clamp(165px, 15vw, 275px); --gz: 9" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/232AE707-4039-4E66-95F8-084C0EC076AB-IMG_9056_kewllt" alt="Am Teltowkanal" width="960" height="1280" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__ph" style="--gx: 4%; --gy: 36%; --gr: 4deg; --gw: clamp(175px, 16vw, 295px); --gz: 10" data-from="left"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/74F6BB4F-EF69-49C6-B307-6F24BE39439F-IMG_8181_wbo1y1" alt="Schönower Park" width="960" height="1280" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__ph" style="--gx: 32%; --gy: 44%; --gr: -9deg; --gw: clamp(165px, 15vw, 270px); --gz: 11" data-from="left"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/D8762E4B-5AD3-4BC6-AFAE-16D30DA9DB7D-IMG_5990_bsrehw" alt="Schweizer Viertel" width="960" height="1280" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__ph gallery__ph--wide" style="--gx: 48%; --gy: 42%; --gr: 3deg; --gz: 12" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_1600/CCD593F3-5A9B-4F39-BFC3-C01B3EC3DC7E-IMG_1711_ssj2fj" alt="Zehlendorf Süd" width="1280" height="720" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__ph" style="--gx: 70%; --gy: 40%; --gr: 7deg; --gw: clamp(160px, 14vw, 265px); --gz: 13" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/BACC6B3C-8301-4707-AE55-DC38E83E664F-IMG_6169_m4ynd5" alt="Wahlkampf am Bahnhof" width="960" height="1280" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__ph" style="--gx: 10%; --gy: 52%; --gr: -6deg; --gw: clamp(165px, 15vw, 280px); --gz: 14" data-from="left"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/38A1E6C6-7C85-451C-8A24-458BF667255D-IMG_1128_g7ry0k" alt="Skatabend" width="960" height="1280" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__ph gallery__ph--tall" style="--gx: 62%; --gy: 54%; --gr: -11deg; --gz: 15" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/B23F3D89-0686-4CD7-8E47-3E06B2770915-IMG_7125_qkipkd" alt="Bäkepark" width="960" height="815" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__ph" style="--gx: 26%; --gy: 58%; --gr: 5deg; --gw: clamp(170px, 15vw, 285px); --gz: 16" data-from="left"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/D31F6841-AD6F-4F02-BB0C-FC198731548D-IMG_2703_y6thnn" alt="Schönower Park" width="842" height="1280" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__ph gallery__ph--wide" style="--gx: 40%; --gy: 62%; --gr: -4deg; --gz: 17" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_900/4A3E074E-2400-4255-AA19-CC462F869E44-IMG_7072_mkgcov" alt="Im Gespräch am Bahnhof" width="1280" height="853" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__ph" style="--gx: 74%; --gy: 66%; --gr: 10deg; --gw: clamp(160px, 14vw, 265px); --gz: 18" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/B7211291-0718-4410-AF25-F4B366FE3C1F-IMG_0586_tmkpzl" alt="Am Teltowkanal" width="960" height="1280" loading="lazy" decoding="async" /></figure>
           </div>
         </section>
 
