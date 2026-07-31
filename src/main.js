@@ -17,25 +17,184 @@ gsap.registerPlugin(ScrollTrigger, CustomEase);
 CustomEase.create('reveal', 'M0,0 C0.77,0 0.175,1 1,1');
 ScrollTrigger.config({ limitCallbacks: true });
 
-/* ---------- Wahlkreis-Karte: Tap/Klick öffnet Bild am Punkt ---------- */
-const spots = document.querySelector('.map__spots');
+/* ---------- Preloader → Hero-Intro ---------- */
+function finishPreloader(preloader) {
+  document.documentElement.dataset.ready = 'true';
+  document.documentElement.removeAttribute('data-loading');
+  preloader?.remove();
+  ScrollTrigger.refresh();
+}
 
-function closeSpots(except) {
-  spots?.querySelectorAll('[aria-expanded="true"]').forEach((btn) => {
-    if (btn !== except) btn.setAttribute('aria-expanded', 'false');
+function initHeroVotePop(delay = 0) {
+  const heroVote = document.querySelector('.hero__vote');
+  if (!heroVote) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    gsap.set(heroVote, { clearProps: 'all' });
+    return;
+  }
+
+  gsap.fromTo(
+    heroVote,
+    { scale: 0.35, autoAlpha: 0 },
+    { scale: 1, autoAlpha: 1, duration: 0.75, ease: 'back.out(2)', delay },
+  );
+}
+
+function initPreloader() {
+  const preloader = document.getElementById('preloader');
+  const heroFrame = document.querySelector('.hero__frame');
+  const heroImg = document.querySelector('.hero__frame img');
+  const heroVote = document.querySelector('.hero__vote');
+
+  if (!preloader || !heroFrame) {
+    finishPreloader(preloader);
+    initHeroVotePop(0.15);
+    return;
+  }
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    finishPreloader(preloader);
+    return;
+  }
+
+  document.documentElement.dataset.loading = 'true';
+
+  const line = preloader.querySelector('.preloader__line');
+  const nameLine = preloader.querySelector('.preloader__name-mask > span');
+  const sigPath = preloader.querySelector('.preloader__sig-path');
+  const inner = preloader.querySelector('.preloader__inner');
+
+  gsap.set(line, { scaleX: 0, transformOrigin: 'left center' });
+  gsap.set(nameLine, { yPercent: 120 });
+  gsap.set(sigPath, { autoAlpha: 0 });
+  gsap.set(heroFrame, { scale: 0.05, autoAlpha: 0 });
+  gsap.set(heroImg, { scale: 1.35 });
+  gsap.set(heroVote, { scale: 0.35, autoAlpha: 0 });
+
+  if (sigPath) {
+    const len = sigPath.getTotalLength();
+    gsap.set(sigPath, {
+      strokeDasharray: len,
+      strokeDashoffset: len,
+      autoAlpha: 1,
+    });
+  }
+
+  const tl = gsap.timeline({
+    defaults: { ease: 'power2.out' },
+    onComplete: () => finishPreloader(preloader),
+  });
+
+  tl.to(line, { scaleX: 1, duration: 0.85, ease: 'power2.inOut' })
+    .to(nameLine, { yPercent: 0, duration: 0.7, ease: 'power3.out' }, '-=0.05')
+    .to(sigPath, { strokeDashoffset: 0, duration: 1.15, ease: 'power1.inOut' }, '+=0.1')
+    .to({}, { duration: 0.28 })
+    .to(inner, { y: 72, autoAlpha: 0, duration: 0.7, ease: 'power2.in' })
+    .to(preloader, { autoAlpha: 0, duration: 0.35, ease: 'power2.in' }, '-=0.25')
+    .add(() => {
+      document.documentElement.dataset.ready = 'true';
+    }, '-=0.15')
+    .to(heroFrame, { scale: 1, autoAlpha: 1, duration: 1.45, ease: 'power3.out' }, '-=0.05')
+    .to(heroImg, { scale: 1, duration: 1.45, ease: 'power3.out' }, '<')
+    .to(heroVote, { scale: 1, autoAlpha: 1, duration: 0.75, ease: 'back.out(2)' }, '+=0.4');
+}
+
+initPreloader();
+
+/* ---------- Wahlkreis-Karte ----------
+ * Marker und Ortsliste teilen einen Zustand: Zeigen (Hover) und Merken (Klick)
+ * sind getrennt, damit ein Klick auf einen bereits überfahrenen Punkt nichts
+ * zurücknimmt. Gerendert wird nur über eine Klasse – kein Layout-Lesen.
+ */
+const mapRoot = document.querySelector('[data-map]');
+const mapTargets = mapRoot ? Array.from(mapRoot.querySelectorAll('[data-i]')) : [];
+let mapPinned = '';
+let mapHovered = '';
+let mapShown = '';
+
+function renderMap() {
+  const next = mapPinned || mapHovered;
+  if (next === mapShown) return;
+  mapShown = next;
+  mapTargets.forEach((el) => {
+    const on = el.dataset.i === next;
+    el.classList.toggle('is-on', on);
+    if (el.tagName === 'BUTTON') el.setAttribute('aria-expanded', String(on));
   });
 }
 
-spots?.addEventListener('click', (event) => {
-  const dot = event.target.closest('.map__dot');
-  if (!dot) return;
-  const isOpen = dot.getAttribute('aria-expanded') === 'true';
-  closeSpots(dot);
-  dot.setAttribute('aria-expanded', String(!isOpen));
+function closeMap() {
+  mapPinned = '';
+  mapHovered = '';
+  renderMap();
+}
+
+mapRoot?.addEventListener('click', (event) => {
+  const button = event.target.closest('button[data-i]');
+  if (!button) return;
+  mapPinned = mapPinned === button.dataset.i ? '' : button.dataset.i;
+  renderMap();
 });
 
 document.addEventListener('click', (event) => {
-  if (!event.target.closest('.map__spot')) closeSpots();
+  if (mapShown && !event.target.closest('[data-map]')) closeMap();
+});
+
+if (mapRoot && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  mapRoot.addEventListener('pointerover', (event) => {
+    const button = event.target.closest('button[data-i]');
+    if (!button) return;
+    mapHovered = button.dataset.i;
+    renderMap();
+  });
+
+  mapRoot.addEventListener('pointerleave', () => {
+    mapHovered = '';
+    renderMap();
+  });
+}
+
+/* ---------- Galerie: Lightbox (mobil) ---------- */
+const galleryGrid = document.querySelector('.gallery__grid');
+const galleryLightbox = document.getElementById('gallery-lightbox');
+const galleryLightboxImg = galleryLightbox?.querySelector('.gallery-lightbox__img');
+const galleryLightboxClose = galleryLightbox?.querySelector('.gallery-lightbox__close');
+const galleryMobile = window.matchMedia('(max-width: 760px)');
+
+function galleryLightboxSrc(src) {
+  return src.replace(/w_\d+/, 'w_1600');
+}
+
+function openGalleryLightbox(img) {
+  if (!galleryLightbox || !galleryLightboxImg) return;
+  galleryLightboxImg.src = galleryLightboxSrc(img.src);
+  galleryLightboxImg.alt = img.alt;
+  galleryLightbox.showModal();
+}
+
+function closeGalleryLightbox() {
+  galleryLightbox?.close();
+}
+
+galleryGrid?.addEventListener('click', (event) => {
+  if (!galleryMobile.matches) return;
+  const img = event.target.closest('.gallery__item img');
+  if (!img) return;
+  openGalleryLightbox(img);
+});
+
+galleryLightboxClose?.addEventListener('click', closeGalleryLightbox);
+
+galleryLightbox?.addEventListener('click', (event) => {
+  if (event.target === galleryLightbox) closeGalleryLightbox();
+});
+
+galleryLightbox?.addEventListener('close', () => {
+  if (galleryLightboxImg) {
+    galleryLightboxImg.removeAttribute('src');
+    galleryLightboxImg.alt = '';
+  }
 });
 
 /* ---------- Fullscreen-Menü (mobil) ---------- */
@@ -59,7 +218,7 @@ menu?.addEventListener('click', (event) => {
 
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
-    closeSpots();
+    closeMap();
     setMenu(false);
   }
 });
@@ -87,7 +246,7 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
         scrollTrigger: once(line, 'top 88%') });
   });
 
-  $$('.reveal:not(.reveal--left):not(.reveal--right):not(.reveal--words):not(.reveal--sig):not(.reveal--spot)')
+  $$('.reveal:not(.reveal--left):not(.reveal--right):not(.reveal--words):not(.reveal--sig)')
     .filter((el) => !inBento(el))
     .forEach((el) => {
       gsap.fromTo(el, { autoAlpha: 0, y: 28 }, {
@@ -110,11 +269,11 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
     });
   });
 
-  $$('.reveal--spot').forEach((el, i) => {
+  /* Karten-Marker: setzen sich einzeln auf die Karte (Skalierung um den Ortspunkt) */
+  $$('.map__pin').forEach((el, i) => {
     gsap.fromTo(el,
-      { autoAlpha: 0, scale: 0.4, xPercent: -50, yPercent: -50 },
-      { autoAlpha: 1, scale: 1, xPercent: -50, yPercent: -50,
-        duration: 0.5, ease: 'back.out(1.4)', delay: i * 0.05,
+      { autoAlpha: 0, scale: 0.4 },
+      { autoAlpha: 1, scale: 1, duration: 0.5, ease: 'back.out(1.5)', delay: i * 0.07,
         scrollTrigger: once('.map', 'top 85%') });
   });
 
@@ -219,66 +378,10 @@ mm.add('(min-width: 761px) and (prefers-reduced-motion: no-preference)', () => {
   }
 });
 
-function initGalleryScrub() {
-  const gallerySection = document.querySelector('.gallery');
-  const galleryItems = $$('.gallery__ph');
-  if (!gallerySection || !galleryItems.length) return () => {};
-
-  const getFromX = (side) => {
-    const off = window.innerWidth * 0.55 + 100;
-    return side === 'right' ? off : -off;
-  };
-
-  const applyFrom = () => {
-    galleryItems.forEach((ph) => {
-      const side = ph.dataset.from === 'right' ? 'right' : 'left';
-      const rot = parseFloat(getComputedStyle(ph).getPropertyValue('--gr')) || 0;
-      gsap.set(ph, {
-        rotation: rot,
-        x: getFromX(side),
-        autoAlpha: 0,
-        force3D: true,
-      });
-    });
-  };
-
-  applyFrom();
-
-  const flyTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: gallerySection,
-      start: 'top 78%',
-      end: 'top 6%',
-      scrub: true,
-      invalidateOnRefresh: true,
-    },
-  });
-
-  galleryItems.forEach((ph, i) => {
-    flyTl.to(ph, { x: 0, autoAlpha: 1, ease: 'none', duration: 0.1 }, 0.2 + i * 0.024);
-  });
-
-  ScrollTrigger.addEventListener('refreshInit', applyFrom);
-
-  return () => ScrollTrigger.removeEventListener('refreshInit', applyFrom);
-}
-
-mm.add('(min-width: 761px) and (prefers-reduced-motion: reduce)', () => {
-  $$('.gallery__ph').forEach((ph) => {
-    const rot = parseFloat(getComputedStyle(ph).getPropertyValue('--gr')) || 0;
-    gsap.set(ph, { rotation: rot, x: 0, y: 0, autoAlpha: 1 });
-  });
-});
-
 mm.add('(min-width: 761px) and (prefers-reduced-motion: no-preference)', () => {
   const track = document.querySelector('.career__track');
   const viewport = document.querySelector('.career__viewport');
-  if (!track || !viewport) {
-    const cleanupGallery = initGalleryScrub();
-    ScrollTrigger.refresh();
-    ScrollTrigger.update();
-    return cleanupGallery;
-  }
+  if (!track || !viewport) return;
 
   viewport.style.overflowX = 'hidden';
   viewport.style.overflowY = 'visible';
@@ -323,11 +426,8 @@ mm.add('(min-width: 761px) and (prefers-reduced-motion: no-preference)', () => {
     tl.to(dot, { scale: 1, duration: 0.05, ease: 'none' }, progresses[i]);
   });
 
-  const cleanupGallery = initGalleryScrub();
   ScrollTrigger.refresh();
   ScrollTrigger.update();
-
-  return cleanupGallery;
 });
 
 mm.add('(max-width: 760px) and (prefers-reduced-motion: no-preference)', () => {

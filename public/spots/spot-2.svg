@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="560" height="360" viewBox="0 0 560 360">
   <rect width="560" height="360" fill="#d2cfc7"/>
-  <circle cx="280" cy="150" r="42" fill="#12b5a5"/>
+  <circle cx="280" cy="150" r="42" fill="#52B7C1"/>
   <text x="50%" y="82%" fill="#101010" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" letter-spacing="2" text-anchor="middle">SCHWEIZER VIERTEL</text>
   <text x="50%" y="92%" fill="#6d6b66" font-family="Arial, Helvetica, sans-serif" font-size="14" text-anchor="middle">Platzhalter – echtes Foto als WebP einsetzen</text>
 </svg>

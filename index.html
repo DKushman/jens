@@ -19,12 +19,32 @@
   </head>
 
   <body>
+    <div class="preloader" id="preloader" aria-hidden="true">
+      <div class="preloader__inner">
+        <div class="preloader__line-row">
+          <span class="preloader__line" aria-hidden="true"></span>
+          <svg class="preloader__sig" viewBox="0 0 280 40" fill="none" aria-hidden="true">
+            <path
+              class="preloader__sig-path"
+              d="M6 26 C6 12 18 8 28 18 C36 26 22 28 30 20 M42 28 L42 10 M42 18 C48 12 62 10 70 20 C76 28 66 30 58 24 M88 22 C96 14 114 12 124 20 C132 28 118 32 106 26 C118 20 138 18 152 24 C166 30 186 26 204 16 C218 8 232 12 244 22"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+        <p class="preloader__name">
+          <span class="preloader__name-mask"><span>Jens Hoffmann</span></span>
+        </p>
+      </div>
+    </div>
+
     <!-- Seiten-Wrapper: liegt über dem fixen Footer (Curtain-Reveal) -->
     <div class="site">
       <header class="topbar">
         <p class="topbar__meta">
           <span class="topbar__place topbar__place--mobile">Berlin, DE</span>
-          <span class="topbar__place topbar__place--desktop">Lichterfelde West und Zehlendorf Süd</span>
           <span class="topbar__coords">52.4333° N, 13.2911° O</span>
         </p>
 
@@ -58,33 +78,28 @@
       <main id="start">
         <!-- ============ HERO ============ -->
         <section class="hero" aria-labelledby="hero-title">
-          <h1 id="hero-title" class="hero__title">
-            <span class="mask"><span class="line line--1">Jens</span></span>
-            <span class="mask"><span class="line line--2">Hoffmann</span></span>
-          </h1>
+          <div class="hero__shell">
+            <div class="hero__frame">
+              <img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_1600/Gemini_Generated_Image_filtiafiltiafilt_bngzu9" alt="Porträt von Jens Hoffmann" width="1600" height="900" fetchpriority="high" decoding="async" />
 
-          <div class="hero__stage">
-            <p class="hero__tagline">
-              <span class="mask tagline tagline--left"><span class="line">Ihr Kandidat</span></span>
-              <span class="mask tagline tagline--right"><span class="line">Wahlkreis&nbsp;3</span></span>
-            </p>
-
-            <figure class="hero__figure">
-              <figcaption class="hero__district">Lichterfelde West und Zehlendorf Süd</figcaption>
-              <div class="hero__frame">
-                <img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_1600/Gemini_Generated_Image_filtiafiltiafilt_bngzu9" alt="Porträt von Jens Hoffmann" width="1600" height="900" fetchpriority="high" decoding="async" />
+              <div class="hero__content">
+                <div class="hero__intro">
+                  <h1 id="hero-title" class="hero__title">
+                    <span class="mask"><span class="line line--1">Jens</span></span>
+                    <span class="mask"><span class="line line--2">Hoffmann</span></span>
+                  </h1>
+                  <p class="hero__district">
+                    <span class="hero__district-line" aria-hidden="true"></span>
+                    <span class="hero__district-text">Lichterfelde West und Zehlendorf Süd</span>
+                  </p>
+                </div>
               </div>
-            </figure>
-          </div>
 
-          <a class="hero__ticker" href="#wahl" aria-label="Zur Kandidatur – Ich kandidiere zum Abgeordnetenhaus">
-            <span class="hero__ticker-track" aria-hidden="true">
-              <span>Ich kandidiere zum Abgeordnetenhaus · Wahlkreis 3 · 20. September 2026 · </span>
-              <span>Ich kandidiere zum Abgeordnetenhaus · Wahlkreis 3 · 20. September 2026 · </span>
-              <span>Ich kandidiere zum Abgeordnetenhaus · Wahlkreis 3 · 20. September 2026 · </span>
-              <span>Ich kandidiere zum Abgeordnetenhaus · Wahlkreis 3 · 20. September 2026 · </span>
-            </span>
-          </a>
+              <a class="hero__vote" href="#wahl" aria-label="Wahlen am 20. September 2026">
+                <span class="hero__vote-text">Wahlen am 20. September</span>
+              </a>
+            </div>
+          </div>
         </section>
 
         <section class="manifest cv" aria-labelledby="manifest-title">
@@ -339,25 +354,25 @@
             <p class="tag tag--meta">Momente aus dem Kiez</p>
           </div>
 
-          <div class="gallery__canvas" id="gallery">
-            <figure class="gallery__ph" style="--gx: 3%; --gy: 2%; --gr: -12deg; --gw: clamp(175px, 16vw, 295px); --gz: 2" data-from="left"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/5B197304-60CA-4D7E-AEB7-FB71F437694D-Frau_Bindel_und_Herr_Hoffmann_fern_c7twan" alt="Wahlkampf im Kiez" width="960" height="1280" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph gallery__ph--tall" style="--gx: 72%; --gy: 1%; --gr: 8deg; --gz: 5" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/728F376D-6B27-4E46-B31F-4DB22703B40F-IMG_8849_gfkyx0" alt="Im Gespräch mit Nachbarinnen und Nachbarn" width="900" height="1280" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph gallery__ph--wide" style="--gx: 28%; --gy: 4%; --gr: -3deg; --gz: 4" data-from="left"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_900/FA676B7E-D2AD-4F59-BAD5-211D4EC4E2D9-6c074e56-5c3a-4c46-846e-56ccc255e93a_iuqyym" alt="Lichterfelde West" width="1280" height="808" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph" style="--gx: 58%; --gy: 6%; --gr: -7deg; --gw: clamp(170px, 15vw, 280px); --gz: 6" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/98FC50C5-D708-4033-918F-14CD8E5B1FAF-IMG_6973_cfejfr" alt="Im Bäkepark" width="1280" height="960" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph" style="--gx: 6%; --gy: 18%; --gr: 9deg; --gw: clamp(180px, 16vw, 300px); --gz: 3" data-from="left"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/5079125F-06A7-4C0A-9B18-40DFCCC0FFB4-IMG_6489_t9seca" alt="Unterwegs im Kiez" width="960" height="1280" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph" style="--gx: 38%; --gy: 16%; --gr: -5deg; --gw: clamp(175px, 16vw, 290px); --gz: 7" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/749026CA-224D-4556-B810-8CA3AC6C7F67-IMG_3035_vm1n0n" alt="Schweizer Viertel" width="1098" height="960" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph gallery__ph--tall" style="--gx: 68%; --gy: 20%; --gr: -10deg; --gz: 1" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/0575CFA6-38FE-40E9-8E19-E26D8033AEAC-IMG_8400_ggdx4i" alt="Porträt von Jens Hoffmann" width="800" height="1280" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph" style="--gx: 22%; --gy: 32%; --gr: 6deg; --gw: clamp(170px, 15vw, 285px); --gz: 8" data-from="left"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/9ADC206A-EE6A-4212-85F7-6124854D5C05-IMG_7672_olamfx" alt="Unterwegs im Kiez" width="960" height="1280" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph" style="--gx: 52%; --gy: 30%; --gr: -8deg; --gw: clamp(165px, 15vw, 275px); --gz: 9" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/232AE707-4039-4E66-95F8-084C0EC076AB-IMG_9056_kewllt" alt="Am Teltowkanal" width="960" height="1280" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph" style="--gx: 4%; --gy: 36%; --gr: 4deg; --gw: clamp(175px, 16vw, 295px); --gz: 10" data-from="left"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/74F6BB4F-EF69-49C6-B307-6F24BE39439F-IMG_8181_wbo1y1" alt="Schönower Park" width="960" height="1280" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph" style="--gx: 32%; --gy: 44%; --gr: -9deg; --gw: clamp(165px, 15vw, 270px); --gz: 11" data-from="left"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/D8762E4B-5AD3-4BC6-AFAE-16D30DA9DB7D-IMG_5990_bsrehw" alt="Schweizer Viertel" width="960" height="1280" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph gallery__ph--wide" style="--gx: 48%; --gy: 42%; --gr: 3deg; --gz: 12" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_1600/CCD593F3-5A9B-4F39-BFC3-C01B3EC3DC7E-IMG_1711_ssj2fj" alt="Zehlendorf Süd" width="1280" height="720" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph" style="--gx: 70%; --gy: 40%; --gr: 7deg; --gw: clamp(160px, 14vw, 265px); --gz: 13" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/BACC6B3C-8301-4707-AE55-DC38E83E664F-IMG_6169_m4ynd5" alt="Wahlkampf am Bahnhof" width="960" height="1280" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph" style="--gx: 10%; --gy: 52%; --gr: -6deg; --gw: clamp(165px, 15vw, 280px); --gz: 14" data-from="left"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/38A1E6C6-7C85-451C-8A24-458BF667255D-IMG_1128_g7ry0k" alt="Skatabend" width="960" height="1280" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph gallery__ph--tall" style="--gx: 62%; --gy: 54%; --gr: -11deg; --gz: 15" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/B23F3D89-0686-4CD7-8E47-3E06B2770915-IMG_7125_qkipkd" alt="Bäkepark" width="960" height="815" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph" style="--gx: 26%; --gy: 58%; --gr: 5deg; --gw: clamp(170px, 15vw, 285px); --gz: 16" data-from="left"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/D31F6841-AD6F-4F02-BB0C-FC198731548D-IMG_2703_y6thnn" alt="Schönower Park" width="842" height="1280" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph gallery__ph--wide" style="--gx: 40%; --gy: 62%; --gr: -4deg; --gz: 17" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_900/4A3E074E-2400-4255-AA19-CC462F869E44-IMG_7072_mkgcov" alt="Im Gespräch am Bahnhof" width="1280" height="853" loading="lazy" decoding="async" /></figure>
-            <figure class="gallery__ph" style="--gx: 74%; --gy: 66%; --gr: 10deg; --gw: clamp(160px, 14vw, 265px); --gz: 18" data-from="right"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/B7211291-0718-4410-AF25-F4B366FE3C1F-IMG_0586_tmkpzl" alt="Am Teltowkanal" width="960" height="1280" loading="lazy" decoding="async" /></figure>
+          <div class="gallery__grid" id="gallery">
+            <figure class="gallery__item"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/5B197304-60CA-4D7E-AEB7-FB71F437694D-Frau_Bindel_und_Herr_Hoffmann_fern_c7twan" alt="Wahlkampf im Kiez" width="960" height="1280" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__item"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/728F376D-6B27-4E46-B31F-4DB22703B40F-IMG_8849_gfkyx0" alt="Im Gespräch mit Nachbarinnen und Nachbarn" width="900" height="1280" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__item"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_900/FA676B7E-D2AD-4F59-BAD5-211D4EC4E2D9-6c074e56-5c3a-4c46-846e-56ccc255e93a_iuqyym" alt="Lichterfelde West" width="1280" height="808" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__item"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/98FC50C5-D708-4033-918F-14CD8E5B1FAF-IMG_6973_cfejfr" alt="Im Bäkepark" width="1280" height="960" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__item"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/5079125F-06A7-4C0A-9B18-40DFCCC0FFB4-IMG_6489_t9seca" alt="Unterwegs im Kiez" width="960" height="1280" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__item"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/749026CA-224D-4556-B810-8CA3AC6C7F67-IMG_3035_vm1n0n" alt="Schweizer Viertel" width="1098" height="960" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__item"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/0575CFA6-38FE-40E9-8E19-E26D8033AEAC-IMG_8400_ggdx4i" alt="Porträt von Jens Hoffmann" width="800" height="1280" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__item"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/9ADC206A-EE6A-4212-85F7-6124854D5C05-IMG_7672_olamfx" alt="Unterwegs im Kiez" width="960" height="1280" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__item"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/232AE707-4039-4E66-95F8-084C0EC076AB-IMG_9056_kewllt" alt="Am Teltowkanal" width="960" height="1280" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__item"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/74F6BB4F-EF69-49C6-B307-6F24BE39439F-IMG_8181_wbo1y1" alt="Schönower Park" width="960" height="1280" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__item"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/D8762E4B-5AD3-4BC6-AFAE-16D30DA9DB7D-IMG_5990_bsrehw" alt="Schweizer Viertel" width="960" height="1280" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__item"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_1600/CCD593F3-5A9B-4F39-BFC3-C01B3EC3DC7E-IMG_1711_ssj2fj" alt="Zehlendorf Süd" width="1280" height="720" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__item"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/BACC6B3C-8301-4707-AE55-DC38E83E664F-IMG_6169_m4ynd5" alt="Wahlkampf am Bahnhof" width="960" height="1280" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__item"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/38A1E6C6-7C85-451C-8A24-458BF667255D-IMG_1128_g7ry0k" alt="Skatabend" width="960" height="1280" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__item"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/B23F3D89-0686-4CD7-8E47-3E06B2770915-IMG_7125_qkipkd" alt="Bäkepark" width="960" height="815" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__item"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/D31F6841-AD6F-4F02-BB0C-FC198731548D-IMG_2703_y6thnn" alt="Schönower Park" width="842" height="1280" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__item"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_900/4A3E074E-2400-4255-AA19-CC462F869E44-IMG_7072_mkgcov" alt="Im Gespräch am Bahnhof" width="1280" height="853" loading="lazy" decoding="async" /></figure>
+            <figure class="gallery__item"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/B7211291-0718-4410-AF25-F4B366FE3C1F-IMG_0586_tmkpzl" alt="Am Teltowkanal" width="960" height="1280" loading="lazy" decoding="async" /></figure>
           </div>
         </section>
 
@@ -369,60 +384,138 @@
             <p class="tag tag--meta">5 Orte im Kiez</p>
           </div>
 
-          <div class="map reveal">
-            <svg viewBox="0 0 900 560" aria-hidden="true" focusable="false">
-              <defs>
-                <pattern id="dotgrid" width="13" height="13" patternUnits="userSpaceOnUse">
-                  <circle cx="3" cy="3" r="1.9" fill="#3a3a36" />
-                </pattern>
-                <clipPath id="district-shape">
-                  <path d="M 140 260 C 130 180, 210 110, 320 100 C 420 92, 470 130, 560 120 C 660 110, 760 150, 800 230 C 838 300, 820 390, 740 430 C 660 470, 560 440, 470 460 C 380 480, 300 500, 220 460 C 150 424, 148 330, 140 260 Z" />
-                </clipPath>
-              </defs>
-              <rect width="900" height="560" fill="url(#dotgrid)" clip-path="url(#district-shape)" />
-              <path d="M 540 122 C 520 220, 530 330, 500 456" fill="none" stroke="#4c4c47" stroke-width="2" stroke-dasharray="2 8" stroke-linecap="round" />
-            </svg>
+          <div class="map reveal" data-map>
+            <div class="map__plane">
+              <img
+                class="map__base"
+                src="/kiez-map.svg"
+                alt="Karte von Lichterfelde West und Zehlendorf Süd mit Straßennetz, S-Bahn-Strecken und dem Teltowkanal"
+                width="1000"
+                height="700"
+                loading="lazy"
+                decoding="async"
+              />
 
-            <span class="map__area" style="--x: 20%; --y: 72%">Zehlendorf Süd</span>
-            <span class="map__area" style="--x: 70%; --y: 22%">Lichterfelde West</span>
+              <p class="map__ctx" style="--x: 11%; --y: 8%">Dahlem</p>
+              <p class="map__ctx" style="--x: 19%; --y: 43%">Zehlendorf</p>
+              <p class="map__ctx map__ctx--water" style="--x: 87%; --y: 74%">Teltowkanal</p>
 
-            <ul class="map__spots">
-              <li class="map__spot reveal reveal--spot" style="--x: 66%; --y: 36%">
-                <button class="map__dot" type="button" aria-expanded="false" aria-label="S-Bahnhof Lichterfelde West – Foto anzeigen"></button>
-                <figure class="map__card">
-                  <img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_560/4A3E074E-2400-4255-AA19-CC462F869E44-IMG_7072_mkgcov" alt="S-Bahnhof Lichterfelde West" width="1280" height="853" loading="lazy" decoding="async" />
-                  <figcaption>S-Bahnhof Lichterfelde West</figcaption>
-                </figure>
-              </li>
-              <li class="map__spot map__spot--edge-r reveal reveal--spot" style="--x: 79%; --y: 58%">
-                <button class="map__dot" type="button" aria-expanded="false" aria-label="Schweizer Viertel – Foto anzeigen"></button>
-                <figure class="map__card">
-                  <img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_560/749026CA-224D-4556-B810-8CA3AC6C7F67-IMG_3035_vm1n0n" alt="Schweizer Viertel" width="1098" height="960" loading="lazy" decoding="async" />
-                  <figcaption>Schweizer Viertel</figcaption>
-                </figure>
-              </li>
-              <li class="map__spot reveal reveal--spot" style="--x: 52%; --y: 66%">
-                <button class="map__dot" type="button" aria-expanded="false" aria-label="Bäkepark – Foto anzeigen"></button>
-                <figure class="map__card">
-                  <img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_560/B23F3D89-0686-4CD7-8E47-3E06B2770915-IMG_7125_qkipkd" alt="Bäkepark" width="960" height="815" loading="lazy" decoding="async" />
-                  <figcaption>Bäkepark</figcaption>
-                </figure>
-              </li>
-              <li class="map__spot map__spot--edge-l reveal reveal--spot" style="--x: 30%; --y: 40%">
-                <button class="map__dot" type="button" aria-expanded="false" aria-label="Schönower Park – Foto anzeigen"></button>
-                <figure class="map__card">
-                  <img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_560/D31F6841-AD6F-4F02-BB0C-FC198731548D-IMG_2703_y6thnn" alt="Schönower Park" width="842" height="1280" loading="lazy" decoding="async" />
-                  <figcaption>Schönower Park</figcaption>
-                </figure>
-              </li>
-              <li class="map__spot reveal reveal--spot" style="--x: 40%; --y: 76%">
-                <button class="map__dot" type="button" aria-expanded="false" aria-label="Teltowkanal – Foto anzeigen"></button>
-                <figure class="map__card">
-                  <img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_560/B7211291-0718-4410-AF25-F4B366FE3C1F-IMG_0586_tmkpzl" alt="Teltowkanal" width="960" height="1280" loading="lazy" decoding="async" />
-                  <figcaption>Teltowkanal</figcaption>
-                </figure>
-              </li>
-            </ul>
+              <ul class="map__pins">
+                <li class="map__pin map__pin--top" data-i="1" style="--x: 61.34%; --y: 20.34%; --tx: -50%">
+                  <button class="map__dot" type="button" data-i="1" aria-expanded="false" aria-controls="kiez-1">
+                    <span class="map__dotnum" aria-hidden="true">01</span>
+                    <span class="sr-only">S-Bahnhof Lichterfelde West</span>
+                  </button>
+                  <span class="map__label" aria-hidden="true">S-Bahnhof<br />Lichterfelde West</span>
+                  <figure class="map__card" id="kiez-1">
+                    <img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_560/4A3E074E-2400-4255-AA19-CC462F869E44-IMG_7072_mkgcov" alt="Am S-Bahnhof Lichterfelde West" width="1280" height="853" loading="lazy" decoding="async" />
+                    <figcaption>S-Bahnhof Lichterfelde West</figcaption>
+                  </figure>
+                </li>
+
+                <li class="map__pin map__pin--top" data-i="2" style="--x: 82.07%; --y: 21.98%; --tx: -80%">
+                  <button class="map__dot" type="button" data-i="2" aria-expanded="false" aria-controls="kiez-2">
+                    <span class="map__dotnum" aria-hidden="true">02</span>
+                    <span class="sr-only">Ludwig-Beck-Platz</span>
+                  </button>
+                  <span class="map__label" aria-hidden="true">Ludwig-Beck-Platz</span>
+                  <figure class="map__card" id="kiez-2">
+                    <img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_560/FA676B7E-D2AD-4F59-BAD5-211D4EC4E2D9-6c074e56-5c3a-4c46-846e-56ccc255e93a_iuqyym" alt="Am Ludwig-Beck-Platz" width="1280" height="808" loading="lazy" decoding="async" />
+                    <figcaption>Ludwig-Beck-Platz</figcaption>
+                  </figure>
+                </li>
+
+                <li class="map__pin" data-i="3" style="--x: 64.87%; --y: 66.63%; --tx: -50%">
+                  <button class="map__dot" type="button" data-i="3" aria-expanded="false" aria-controls="kiez-3">
+                    <span class="map__dotnum" aria-hidden="true">03</span>
+                    <span class="sr-only">Schweizer Viertel</span>
+                  </button>
+                  <span class="map__label" aria-hidden="true">Schweizer Viertel</span>
+                  <figure class="map__card" id="kiez-3">
+                    <img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_560/749026CA-224D-4556-B810-8CA3AC6C7F67-IMG_3035_vm1n0n" alt="Im Schweizer Viertel" width="1098" height="960" loading="lazy" decoding="async" />
+                    <figcaption>Schweizer Viertel</figcaption>
+                  </figure>
+                </li>
+
+                <li class="map__pin" data-i="4" style="--x: 54.85%; --y: 79.68%; --tx: -50%">
+                  <button class="map__dot" type="button" data-i="4" aria-expanded="false" aria-controls="kiez-4">
+                    <span class="map__dotnum" aria-hidden="true">04</span>
+                    <span class="sr-only">Platz des 4. Juli</span>
+                  </button>
+                  <span class="map__label" aria-hidden="true">Platz des 4. Juli</span>
+                  <figure class="map__card" id="kiez-4">
+                    <img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_560/5079125F-06A7-4C0A-9B18-40DFCCC0FFB4-IMG_6489_t9seca" alt="Am Platz des 4. Juli" width="960" height="1280" loading="lazy" decoding="async" />
+                    <figcaption>Platz des 4. Juli</figcaption>
+                  </figure>
+                </li>
+
+                <li class="map__pin" data-i="5" style="--x: 23.59%; --y: 75.88%; --tx: -22%">
+                  <button class="map__dot" type="button" data-i="5" aria-expanded="false" aria-controls="kiez-5">
+                    <span class="map__dotnum" aria-hidden="true">05</span>
+                    <span class="sr-only">Zehlendorf Süd</span>
+                  </button>
+                  <span class="map__label" aria-hidden="true">Zehlendorf Süd</span>
+                  <figure class="map__card" id="kiez-5">
+                    <img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_560/CCD593F3-5A9B-4F39-BFC3-C01B3EC3DC7E-IMG_1711_ssj2fj" alt="In Zehlendorf Süd" width="1280" height="720" loading="lazy" decoding="async" />
+                    <figcaption>Zehlendorf Süd</figcaption>
+                  </figure>
+                </li>
+              </ul>
+
+              <p class="map__scale" aria-hidden="true"><span class="map__scalebar"></span>500 m</p>
+              <p class="map__north" aria-hidden="true">N</p>
+            </div>
+
+            <div class="map__side">
+              <p class="map__hint">Ort wählen – auf der Karte oder in der Liste.</p>
+              <ol class="map__legend">
+                <li class="map__place" data-i="1">
+                  <button class="map__placebtn" type="button" data-i="1" aria-expanded="false" aria-controls="kiez-1">
+                    <span class="map__placenum" aria-hidden="true">01</span>
+                    <span class="map__placetext">
+                      <span class="map__placename">S-Bahnhof Lichterfelde West</span>
+                      <span class="map__placemeta">S1 · Tor in den Kiez</span>
+                    </span>
+                  </button>
+                </li>
+                <li class="map__place" data-i="2">
+                  <button class="map__placebtn" type="button" data-i="2" aria-expanded="false" aria-controls="kiez-2">
+                    <span class="map__placenum" aria-hidden="true">02</span>
+                    <span class="map__placetext">
+                      <span class="map__placename">Ludwig-Beck-Platz</span>
+                      <span class="map__placemeta">Marktplatz mitten im Kiez</span>
+                    </span>
+                  </button>
+                </li>
+                <li class="map__place" data-i="3">
+                  <button class="map__placebtn" type="button" data-i="3" aria-expanded="false" aria-controls="kiez-3">
+                    <span class="map__placenum" aria-hidden="true">03</span>
+                    <span class="map__placetext">
+                      <span class="map__placename">Schweizer Viertel</span>
+                      <span class="map__placemeta">Wohnkiez an der Finckensteinallee</span>
+                    </span>
+                  </button>
+                </li>
+                <li class="map__place" data-i="4">
+                  <button class="map__placebtn" type="button" data-i="4" aria-expanded="false" aria-controls="kiez-4">
+                    <span class="map__placenum" aria-hidden="true">04</span>
+                    <span class="map__placetext">
+                      <span class="map__placename">Platz des 4. Juli</span>
+                      <span class="map__placemeta">Große Freifläche im Süden</span>
+                    </span>
+                  </button>
+                </li>
+                <li class="map__place" data-i="5">
+                  <button class="map__placebtn" type="button" data-i="5" aria-expanded="false" aria-controls="kiez-5">
+                    <span class="map__placenum" aria-hidden="true">05</span>
+                    <span class="map__placetext">
+                      <span class="map__placename">Zehlendorf Süd</span>
+                      <span class="map__placemeta">Der Westen des Wahlkreises</span>
+                    </span>
+                  </button>
+                </li>
+              </ol>
+            </div>
           </div>
         </section>
 
@@ -496,6 +589,13 @@
         <a href="#start">Nach oben ↑</a>
       </div>
     </footer>
+
+    <dialog class="gallery-lightbox" id="gallery-lightbox" aria-label="Vergrößerte Bildansicht">
+      <button class="gallery-lightbox__close" type="button" aria-label="Schließen">×</button>
+      <div class="gallery-lightbox__inner">
+        <img class="gallery-lightbox__img" src="" alt="" width="1600" height="1200" decoding="async" />
+      </div>
+    </dialog>
 
     <script type="module" src="/src/main.js"></script>
   </body>
