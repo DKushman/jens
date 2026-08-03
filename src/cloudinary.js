@@ -1,8 +1,18 @@
 /** Cloudinary Delivery-URLs – Ordner „Jens“ (Cloud: dqcdbdt4v) */
 const CLOUD = 'dqcdbdt4v';
 
+/** Karten mobil / Listen-Thumb */
+export const GOALS_CARD_W = 480;
+/** Cursor-Hover-Vorschau (größer, aber nicht Full-Res) */
+export const GOALS_HOVER_W = 840;
+const GOALS_WIDTHS = [360, GOALS_CARD_W, 640];
+
 export function cld(id, w = 960) {
   return `https://res.cloudinary.com/${CLOUD}/image/upload/f_auto,q_auto,w_${w}/${id}`;
+}
+
+export function cldSrcSet(id, widths = GOALS_WIDTHS) {
+  return widths.map((w) => `${cld(id, w)} ${w}w`).join(', ');
 }
 
 export const media = {

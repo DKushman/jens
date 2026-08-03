@@ -23,19 +23,24 @@
       <div class="preloader__inner">
         <div class="preloader__line-row">
           <span class="preloader__line" aria-hidden="true"></span>
-          <svg class="preloader__sig" viewBox="0 0 280 40" fill="none" aria-hidden="true">
-            <path
-              class="preloader__sig-path"
-              d="M6 26 C6 12 18 8 28 18 C36 26 22 28 30 20 M42 28 L42 10 M42 18 C48 12 62 10 70 20 C76 28 66 30 58 24 M88 22 C96 14 114 12 124 20 C132 28 118 32 106 26 C118 20 138 18 152 24 C166 30 186 26 204 16 C218 8 232 12 244 22"
-              stroke="currentColor"
-              stroke-width="1.6"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
+          <div class="preloader__sig-wrap" aria-hidden="true">
+            <img class="preloader__sig-img" src="/Group%2013.svg" alt="" width="892" height="679" decoding="async" />
+          </div>
         </div>
-        <p class="preloader__name">
-          <span class="preloader__name-mask"><span>Jens Hoffmann</span></span>
+        <p class="preloader__name" aria-label="Jens Hoffmann">
+          <span class="preloader__letter-mask"><span>J</span></span><!--
+          --><span class="preloader__letter-mask"><span>e</span></span><!--
+          --><span class="preloader__letter-mask"><span>n</span></span><!--
+          --><span class="preloader__letter-mask"><span>s</span></span><!--
+          --><span class="preloader__letter-mask preloader__letter-mask--gap" aria-hidden="true"><span>&nbsp;</span></span><!--
+          --><span class="preloader__letter-mask"><span>H</span></span><!--
+          --><span class="preloader__letter-mask"><span>o</span></span><!--
+          --><span class="preloader__letter-mask"><span>f</span></span><!--
+          --><span class="preloader__letter-mask"><span>f</span></span><!--
+          --><span class="preloader__letter-mask"><span>m</span></span><!--
+          --><span class="preloader__letter-mask"><span>a</span></span><!--
+          --><span class="preloader__letter-mask"><span>n</span></span><!--
+          --><span class="preloader__letter-mask"><span>n</span></span>
         </p>
       </div>
     </div>
@@ -43,44 +48,71 @@
     <!-- Seiten-Wrapper: liegt über dem fixen Footer (Curtain-Reveal) -->
     <div class="site">
       <header class="topbar">
-        <p class="topbar__meta">
-          <span class="topbar__place topbar__place--mobile">Berlin, DE</span>
-          <span class="topbar__coords">52.4333° N, 13.2911° O</span>
-        </p>
-
-        <nav class="topbar__nav" aria-label="Hauptnavigation">
-          <ul>
-            <li><a href="#start">Start</a></li>
-            <li><a href="#ziele">Ziele</a></li>
-            <li><a href="#wahlkreis">Wahlkreis</a></li>
-            <li><a href="#wahl">Wahl</a></li>
-            <li><a href="#kontakt">Kontakt</a></li>
-          </ul>
-        </nav>
-        <button class="topbar__burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menü öffnen">
-          <span></span><span></span>
-        </button>
+        <div class="menu-pill">
+          <button class="menu-pill__backdrop" type="button" tabindex="-1" aria-hidden="true"></button>
+          <div class="menu-pill__shell">
+            <button class="menu-pill__toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Menü öffnen">
+              <span class="menu-pill__icon" aria-hidden="true">
+                <span></span><span></span>
+              </span>
+            </button>
+            <nav class="menu-pill__panel" id="site-menu" aria-label="Hauptmenü" inert>
+              <ul class="menu-pill__list">
+                <li class="menu-pill__item" style="--i:0">
+                  <a href="#start">
+                    <img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_640/FA676B7E-D2AD-4F59-BAD5-211D4EC4E2D9-6c074e56-5c3a-4c46-846e-56ccc255e93a_iuqyym" alt="" width="1280" height="808" loading="lazy" decoding="async" />
+                    <span>Start</span>
+                  </a>
+                </li>
+                <li class="menu-pill__item" style="--i:1">
+                  <a href="#person">
+                    <img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_640/0575CFA6-38FE-40E9-8E19-E26D8033AEAC-IMG_8400_ggdx4i" alt="" width="800" height="1280" loading="lazy" decoding="async" />
+                    <span>Zur Person</span>
+                  </a>
+                </li>
+                <li class="menu-pill__item" style="--i:2">
+                  <a href="#ziele">
+                    <img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_640/4A3E074E-2400-4255-AA19-CC462F869E44-IMG_7072_mkgcov" alt="" width="1280" height="853" loading="lazy" decoding="async" />
+                    <span>Ziele</span>
+                  </a>
+                </li>
+                <li class="menu-pill__item" style="--i:3">
+                  <a href="#werdegang">
+                    <img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_640/v1785430102/85A020F1-02AB-4FE5-94AE-F53D5EE585A8-photo-output_z2z8o4" alt="" width="960" height="1280" loading="lazy" decoding="async" />
+                    <span>Werdegang</span>
+                  </a>
+                </li>
+                <li class="menu-pill__item" style="--i:4">
+                  <a href="#wahlkreis">
+                    <img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_640/CCD593F3-5A9B-4F39-BFC3-C01B3EC3DC7E-IMG_1711_ssj2fj" alt="" width="1280" height="720" loading="lazy" decoding="async" />
+                    <span>Wahlkreis</span>
+                  </a>
+                </li>
+                <li class="menu-pill__item" style="--i:5">
+                  <a href="#wahl">
+                    <img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_640/5B197304-60CA-4D7E-AEB7-FB71F437694D-Frau_Bindel_und_Herr_Hoffmann_fern_c7twan" alt="" width="960" height="1280" loading="lazy" decoding="async" />
+                    <span>Wahl</span>
+                  </a>
+                </li>
+                <li class="menu-pill__item" style="--i:6">
+                  <a href="#kontakt">
+                    <img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_640/749026CA-224D-4556-B810-8CA3AC6C7F67-IMG_3035_vm1n0n" alt="" width="1098" height="960" loading="lazy" decoding="async" />
+                    <span>Kontakt</span>
+                  </a>
+                </li>
+              </ul>
+              <p class="menu-pill__foot">#kiezfüralle · Wahl am 20. September 2026</p>
+            </nav>
+          </div>
+        </div>
       </header>
-
-      <!-- Fullscreen-Menü (mobil) -->
-      <nav class="menu" id="menu" aria-label="Menü">
-        <ul class="menu__list">
-          <li class="menu__item" style="--i:0"><span class="mask"><a href="#start">Start</a></span></li>
-          <li class="menu__item" style="--i:1"><span class="mask"><a href="#person">Zur Person</a></span></li>
-          <li class="menu__item" style="--i:2"><span class="mask"><a href="#ziele">Ziele</a></span></li>
-          <li class="menu__item" style="--i:3"><span class="mask"><a href="#werdegang">Werdegang</a></span></li>
-          <li class="menu__item" style="--i:4"><span class="mask"><a href="#wahlkreis">Wahlkreis</a></span></li>
-          <li class="menu__item" style="--i:5"><span class="mask"><a href="#wahl">Wahl</a></span></li>
-        </ul>
-        <p class="menu__meta">#kiezfüralle · Wahl am 20. September 2026</p>
-      </nav>
 
       <main id="start">
         <!-- ============ HERO ============ -->
         <section class="hero" aria-labelledby="hero-title">
           <div class="hero__shell">
             <div class="hero__frame">
-              <img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_1600/Gemini_Generated_Image_filtiafiltiafilt_bngzu9" alt="Porträt von Jens Hoffmann" width="1600" height="900" fetchpriority="high" decoding="async" />
+              <img src="/Group%2012.webp" alt="Porträt von Jens Hoffmann" width="6559" height="4096" fetchpriority="high" decoding="async" />
 
               <div class="hero__content">
                 <div class="hero__intro">
@@ -120,13 +152,14 @@
           </p>
         </section>
 
-        <!-- ============ STATEMENT (hell, Wort-für-Wort) ============ -->
+        <!-- ============ STATEMENT (Analogue: Label | Claim) ============ -->
         <section class="statement cv" aria-labelledby="statement-title">
-          <span class="statement__arrow" aria-hidden="true">→</span>
-          <div class="statement__inner">
-            <h2 class="sr-only" id="statement-title">Der Kandidat</h2>
-            <span class="statement__tag tag">(Der Kandidat)</span>
-            <p class="ws reveal reveal--words"><span class="w" style="--wi:0"><span>In</span></span> <span class="w" style="--wi:1"><span>über</span></span> <span class="w" style="--wi:2"><span>25</span></span> <span class="w" style="--wi:3"><span>Berufsjahren&nbsp;–</span></span> <span class="w" style="--wi:4"><span>14</span></span> <span class="w" style="--wi:5"><span>davon</span></span> <span class="w" style="--wi:6"><span>im</span></span> <span class="w" style="--wi:7"><span>Bundeskanzleramt&nbsp;–</span></span> <span class="w" style="--wi:8"><span>habe</span></span> <span class="w" style="--wi:9"><span>ich</span></span> <span class="w" style="--wi:10"><span>ein</span></span> <span class="w" style="--wi:11"><span>Netzwerk</span></span> <span class="w" style="--wi:12"><span>aufgebaut,</span></span> <span class="w" style="--wi:13"><span>das</span></span> <span class="w" style="--wi:14"><span>ich</span></span> <span class="w" style="--wi:15"><span>für</span></span> <span class="w" style="--wi:16"><span>unseren</span></span> <span class="w" style="--wi:17"><span>Kiez</span></span> <span class="w" style="--wi:18"><span>nutzen</span></span> <span class="w" style="--wi:19"><span>werde.</span></span> <span class="w" style="--wi:20"><span>Ich</span></span> <span class="w" style="--wi:21"><span>kenne</span></span> <span class="w" style="--wi:22"><span>die</span></span> <span class="w" style="--wi:23"><span>Themen</span></span> <span class="w" style="--wi:24"><span>vor</span></span> <span class="w" style="--wi:25"><span>Ort</span></span> <span class="w" style="--wi:26"><span>und</span></span> <span class="w" style="--wi:27"><span>denke</span></span> <span class="w" style="--wi:28"><span>Lösungen</span></span> <span class="w" style="--wi:29"><span>über</span></span> <span class="w" style="--wi:30"><span>Bezirks-</span></span> <span class="w" style="--wi:31"><span>und</span></span> <span class="w" style="--wi:32"><span>Landesgrenzen</span></span> <span class="w" style="--wi:33"><span>hinweg.</span></span></p>
+          <div class="statement__rail">
+            <p class="statement__label" id="statement-title">Der Kandidat</p>
+            <span class="statement__rule" aria-hidden="true"></span>
+          </div>
+          <div class="statement__body">
+            <p class="statement__claim ws reveal reveal--words"><span class="w" style="--wi:0"><span>In</span></span> <span class="w" style="--wi:1"><span>über</span></span> <span class="w" style="--wi:2"><span>25</span></span> <span class="w" style="--wi:3"><span>Berufsjahren&nbsp;–</span></span> <span class="w" style="--wi:4"><span>14</span></span> <span class="w" style="--wi:5"><span>davon</span></span> <span class="w" style="--wi:6"><span>im</span></span> <span class="w" style="--wi:7"><span>Bundeskanzleramt&nbsp;–</span></span> <span class="w" style="--wi:8"><span>habe</span></span> <span class="w" style="--wi:9"><span>ich</span></span> <span class="w" style="--wi:10"><span>ein</span></span> <span class="w w--accent" style="--wi:11"><span>Netzwerk</span></span> <span class="w" style="--wi:12"><span>aufgebaut,</span></span> <span class="w" style="--wi:13"><span>das</span></span> <span class="w" style="--wi:14"><span>ich</span></span> <span class="w" style="--wi:15"><span>für</span></span> <span class="w" style="--wi:16"><span>unseren</span></span> <span class="w w--accent" style="--wi:17"><span>Kiez</span></span> <span class="w" style="--wi:18"><span>nutzen</span></span> <span class="w" style="--wi:19"><span>werde.</span></span> <span class="w" style="--wi:20"><span>Ich</span></span> <span class="w" style="--wi:21"><span>kenne</span></span> <span class="w" style="--wi:22"><span>die</span></span> <span class="w" style="--wi:23"><span>Themen</span></span> <span class="w" style="--wi:24"><span>vor</span></span> <span class="w" style="--wi:25"><span>Ort</span></span> <span class="w" style="--wi:26"><span>und</span></span> <span class="w" style="--wi:27"><span>denke</span></span> <span class="w w--accent" style="--wi:28"><span>Lösungen</span></span> <span class="w" style="--wi:29"><span>über</span></span> <span class="w" style="--wi:30"><span>Bezirks-</span></span> <span class="w" style="--wi:31"><span>und</span></span> <span class="w" style="--wi:32"><span>Landesgrenzen</span></span> <span class="w" style="--wi:33"><span>hinweg.</span></span></p>
           </div>
         </section>
 
@@ -222,59 +255,59 @@
             <h2 class="sechead__title sechead__big" id="goals-title">7 Ziele für den <em>Kiez.</em></h2>
           </header>
 
-          <div class="goals__floater" aria-hidden="true"><img src="" alt="" width="280" height="210" decoding="async" /></div>
+          <div class="goals__floater" aria-hidden="true"><img src="" alt="" width="840" height="630" decoding="async" /></div>
 
           <ol class="goals__list">
-            <li class="goals__item reveal" data-img="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_560/4A3E074E-2400-4255-AA19-CC462F869E44-IMG_7072_mkgcov">
-              <figure class="goals__media"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_560/4A3E074E-2400-4255-AA19-CC462F869E44-IMG_7072_mkgcov" alt="" width="1280" height="853" loading="lazy" decoding="async" /></figure>
+            <li class="goals__item reveal">
+              <figure class="goals__media"><img alt="" loading="lazy" decoding="async" /></figure>
               <span class="goals__num" aria-hidden="true">01</span>
               <div class="goals__body">
                 <h3 class="goals__name">Wohnraum schaffen</h3>
                 <p class="goals__desc">Durch Neubau und Aktivierung von Bestand.</p>
               </div>
             </li>
-            <li class="goals__item reveal" data-img="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_560/749026CA-224D-4556-B810-8CA3AC6C7F67-IMG_3035_vm1n0n">
-              <figure class="goals__media"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_560/749026CA-224D-4556-B810-8CA3AC6C7F67-IMG_3035_vm1n0n" alt="" width="1098" height="960" loading="lazy" decoding="async" /></figure>
+            <li class="goals__item reveal">
+              <figure class="goals__media"><img alt="" loading="lazy" decoding="async" /></figure>
               <span class="goals__num" aria-hidden="true">02</span>
               <div class="goals__body">
                 <h3 class="goals__name">Wirtschaft im Kiez</h3>
                 <p class="goals__desc">Einzelhandel, Dienstleistung, Industrie und Handwerk regional stärken – und Wochenmärkte vor Ort ermöglichen.</p>
               </div>
             </li>
-            <li class="goals__item reveal" data-img="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_560/B23F3D89-0686-4CD7-8E47-3E06B2770915-IMG_7125_qkipkd">
-              <figure class="goals__media"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_560/B23F3D89-0686-4CD7-8E47-3E06B2770915-IMG_7125_qkipkd" alt="" width="960" height="815" loading="lazy" decoding="async" /></figure>
+            <li class="goals__item reveal">
+              <figure class="goals__media"><img alt="" loading="lazy" decoding="async" /></figure>
               <span class="goals__num" aria-hidden="true">03</span>
               <div class="goals__body">
                 <h3 class="goals__name">Mobilität ohne Ideologie</h3>
                 <p class="goals__desc">Ideologiefreie Mobilitätslösungen, auch über die Landesgrenzen hinweg.</p>
               </div>
             </li>
-            <li class="goals__item reveal" data-img="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_560/85A020F1-02AB-4FE5-94AE-F53D5EE585A8-photo-output_z2z8o4">
-              <figure class="goals__media"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_560/85A020F1-02AB-4FE5-94AE-F53D5EE585A8-photo-output_z2z8o4" alt="" width="960" height="1199" loading="lazy" decoding="async" /></figure>
+            <li class="goals__item reveal">
+              <figure class="goals__media"><img alt="" loading="lazy" decoding="async" /></figure>
               <span class="goals__num" aria-hidden="true">04</span>
               <div class="goals__body">
                 <h3 class="goals__name">Gesundheit &amp; Wissenschaft</h3>
                 <p class="goals__desc">Den Gesundheits- und Wissenschaftsstandort weiterentwickeln.</p>
               </div>
             </li>
-            <li class="goals__item reveal" data-img="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_560/B7211291-0718-4410-AF25-F4B366FE3C1F-IMG_0586_tmkpzl">
-              <figure class="goals__media"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_560/B7211291-0718-4410-AF25-F4B366FE3C1F-IMG_0586_tmkpzl" alt="" width="960" height="1280" loading="lazy" decoding="async" /></figure>
+            <li class="goals__item reveal">
+              <figure class="goals__media"><img alt="" loading="lazy" decoding="async" /></figure>
               <span class="goals__num" aria-hidden="true">05</span>
               <div class="goals__body">
                 <h3 class="goals__name">Sauber &amp; sicher</h3>
                 <p class="goals__desc">Einsatz für Sauberkeit der Plätze und Sicherheit im öffentlichen Raum.</p>
               </div>
             </li>
-            <li class="goals__item reveal" data-img="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/20933957-C446-4BFA-9531-74CCA1488500-IMG_4598_gtwr9m">
-              <figure class="goals__media"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_800/20933957-C446-4BFA-9531-74CCA1488500-IMG_4598_gtwr9m" alt="" width="767" height="810" loading="lazy" decoding="async" /></figure>
+            <li class="goals__item reveal">
+              <figure class="goals__media"><img alt="" loading="lazy" decoding="async" /></figure>
               <span class="goals__num" aria-hidden="true">06</span>
               <div class="goals__body">
                 <h3 class="goals__name">Bildung &amp; Sport</h3>
                 <p class="goals__desc">Kita-, Jugend- und Schuleinrichtungen sowie Sportstätten unterstützen.</p>
               </div>
             </li>
-            <li class="goals__item reveal" data-img="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_1600/CCD593F3-5A9B-4F39-BFC3-C01B3EC3DC7E-IMG_1711_ssj2fj">
-              <figure class="goals__media"><img src="https://res.cloudinary.com/dqcdbdt4v/image/upload/f_auto,q_auto,w_1600/CCD593F3-5A9B-4F39-BFC3-C01B3EC3DC7E-IMG_1711_ssj2fj" alt="" width="1280" height="720" loading="lazy" decoding="async" /></figure>
+            <li class="goals__item reveal">
+              <figure class="goals__media"><img alt="" loading="lazy" decoding="async" /></figure>
               <span class="goals__num" aria-hidden="true">07</span>
               <div class="goals__body">
                 <h3 class="goals__name">Kultur fördern</h3>

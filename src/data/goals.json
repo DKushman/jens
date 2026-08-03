@@ -1,0 +1,58 @@
+[
+  {
+    "alt": "Wohnraum schaffen",
+    "cardSrc": "/goals/goal-01-card.jpg",
+    "hoverSrc": "/goals/goal-01.jpg",
+    "width": 2700,
+    "height": 1810,
+    "credit": "Mia Vargas / Pexels"
+  },
+  {
+    "alt": "Wirtschaft im Kiez",
+    "cardSrc": "/goals/goal-02-card.jpg",
+    "hoverSrc": "/goals/goal-02.jpg",
+    "width": 6000,
+    "height": 4000,
+    "credit": "Cem Dolcan / Pexels"
+  },
+  {
+    "alt": "Mobilität ohne Ideologie",
+    "cardSrc": "/goals/goal-03-card.jpg",
+    "hoverSrc": "/goals/goal-03.jpg",
+    "width": 4032,
+    "height": 3024,
+    "credit": "wd toro🇲🇨 / Pexels"
+  },
+  {
+    "alt": "Gesundheit und Wissenschaft",
+    "cardSrc": "/goals/goal-04-card.jpg",
+    "hoverSrc": "/goals/goal-04.jpg",
+    "width": 5192,
+    "height": 3466,
+    "credit": "Pavel Danilyuk / Pexels"
+  },
+  {
+    "alt": "Sauber und sicher",
+    "cardSrc": "/goals/goal-05-card.jpg",
+    "hoverSrc": "/goals/goal-05.jpg",
+    "width": 5896,
+    "height": 3936,
+    "credit": "Vitali Adutskevich / Pexels"
+  },
+  {
+    "alt": "Bildung und Sport",
+    "cardSrc": "/goals/goal-06-card.jpg",
+    "hoverSrc": "/goals/goal-06.jpg",
+    "width": 6016,
+    "height": 4016,
+    "credit": "Haibo  Ni / Pexels"
+  },
+  {
+    "alt": "Kultur fördern",
+    "cardSrc": "/goals/goal-07-card.jpg",
+    "hoverSrc": "/goals/goal-07.jpg",
+    "width": 6000,
+    "height": 4000,
+    "credit": "Noura Zaher / Pexels"
+  }
+]

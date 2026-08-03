@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "fetch:images": "node scripts/fetch-images.mjs"
+    "fetch:images": "node scripts/fetch-images.mjs",
+    "fetch:goals": "node scripts/fetch-goals-pexels.mjs"
   },
   "devDependencies": {
     "vite": "^5.4.0"

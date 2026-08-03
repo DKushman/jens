@@ -11,18 +11,76 @@
  */
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { CustomEase } from 'gsap/CustomEase';
+import goals from './data/goals.json';
 
-gsap.registerPlugin(ScrollTrigger, CustomEase);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, CustomEase);
 CustomEase.create('reveal', 'M0,0 C0.77,0 0.175,1 1,1');
+CustomEase.create('menuInflate', 'M0,0 C0.22,1 0.36,1 1,1');
+CustomEase.create('menuDeflate', 'M0,0 C0.45,0 0.15,1 1,1');
 ScrollTrigger.config({ limitCallbacks: true });
 
+/* ---------- Zahlen: einmaliger Reveal per Intersection Observer ---------- */
+function initStatsReveal() {
+  const stats = document.querySelector('.person__stats');
+  if (!stats) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    stats.classList.add('is-inview');
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (!entry.isIntersecting) return;
+      stats.classList.add('is-inview');
+      observer.disconnect();
+    },
+    {
+      threshold: 0,
+      /* Später triggern – Sektion erst sichtbar, dann Zahlen rein */
+      rootMargin: '0px 0px -8% 0px',
+    },
+  );
+
+  observer.observe(stats);
+}
+
+initStatsReveal();
+
+/* ---------- Ziele: lokale Bilder (einmalig via Pexels) ---------- */
+function initGoalsImages() {
+  const items = document.querySelectorAll('.goals__item');
+  items.forEach((item, i) => {
+    const meta = goals[i];
+    if (!meta) return;
+
+    const img = item.querySelector('.goals__media img');
+    item.dataset.hoverSrc = meta.hoverSrc || meta.src;
+
+    if (!img) return;
+
+    img.src = meta.cardSrc || meta.src;
+    img.alt = meta.alt || '';
+    img.width = meta.width;
+    img.height = meta.height;
+  });
+}
+
+initGoalsImages();
+
 /* ---------- Preloader → Hero-Intro ---------- */
-function finishPreloader(preloader) {
+function enablePageInteraction(preloader) {
   document.documentElement.dataset.ready = 'true';
   document.documentElement.removeAttribute('data-loading');
-  preloader?.remove();
+  preloader?.style.setProperty('pointer-events', 'none');
   ScrollTrigger.refresh();
+}
+
+function finishPreloader(preloader) {
+  enablePageInteraction(preloader);
+  preloader?.remove();
 }
 
 function initHeroVotePop(delay = 0) {
@@ -61,43 +119,43 @@ function initPreloader() {
   document.documentElement.dataset.loading = 'true';
 
   const line = preloader.querySelector('.preloader__line');
-  const nameLine = preloader.querySelector('.preloader__name-mask > span');
-  const sigPath = preloader.querySelector('.preloader__sig-path');
+  const letters = preloader.querySelectorAll('.preloader__letter-mask > span');
+  const sigWrap = preloader.querySelector('.preloader__sig-wrap');
   const inner = preloader.querySelector('.preloader__inner');
 
   gsap.set(line, { scaleX: 0, transformOrigin: 'left center' });
-  gsap.set(nameLine, { yPercent: 120 });
-  gsap.set(sigPath, { autoAlpha: 0 });
+  gsap.set(letters, { yPercent: 120 });
+  gsap.set(sigWrap, { clipPath: 'inset(0 100% 0 0)' });
   gsap.set(heroFrame, { scale: 0.05, autoAlpha: 0 });
   gsap.set(heroImg, { scale: 1.35 });
   gsap.set(heroVote, { scale: 0.35, autoAlpha: 0 });
 
-  if (sigPath) {
-    const len = sigPath.getTotalLength();
-    gsap.set(sigPath, {
-      strokeDasharray: len,
-      strokeDashoffset: len,
-      autoAlpha: 1,
-    });
-  }
-
   const tl = gsap.timeline({
     defaults: { ease: 'power2.out' },
-    onComplete: () => finishPreloader(preloader),
   });
 
-  tl.to(line, { scaleX: 1, duration: 0.85, ease: 'power2.inOut' })
-    .to(nameLine, { yPercent: 0, duration: 0.7, ease: 'power3.out' }, '-=0.05')
-    .to(sigPath, { strokeDashoffset: 0, duration: 1.15, ease: 'power1.inOut' }, '+=0.1')
-    .to({}, { duration: 0.28 })
-    .to(inner, { y: 72, autoAlpha: 0, duration: 0.7, ease: 'power2.in' })
-    .to(preloader, { autoAlpha: 0, duration: 0.35, ease: 'power2.in' }, '-=0.25')
-    .add(() => {
-      document.documentElement.dataset.ready = 'true';
-    }, '-=0.15')
-    .to(heroFrame, { scale: 1, autoAlpha: 1, duration: 1.45, ease: 'power3.out' }, '-=0.05')
-    .to(heroImg, { scale: 1, duration: 1.45, ease: 'power3.out' }, '<')
-    .to(heroVote, { scale: 1, autoAlpha: 1, duration: 0.75, ease: 'back.out(2)' }, '+=0.4');
+  tl.to(line, { scaleX: 1, duration: 0.45, ease: 'power2.inOut' })
+    .to(letters, { yPercent: 0, duration: 0.4, stagger: 0.038, ease: 'power3.out' }, '-=0.12')
+    .to(sigWrap, { clipPath: 'inset(0 0% 0 0)', duration: 1.05, ease: 'none' }, '-=0.05')
+    .to({}, { duration: 0.1 })
+    .to(inner, { y: 60, autoAlpha: 0, duration: 0.42, ease: 'power2.in' })
+    .to(
+      preloader,
+      {
+        autoAlpha: 0,
+        duration: 0.26,
+        ease: 'power2.in',
+        onComplete: () => {
+          preloader.style.pointerEvents = 'none';
+          preloader.remove();
+        },
+      },
+      '-=0.2',
+    )
+    .add(() => enablePageInteraction(preloader), '-=0.12')
+    .to(heroFrame, { scale: 1, autoAlpha: 1, duration: 1.05, ease: 'power3.out' }, '-=0.04')
+    .to(heroImg, { scale: 1, duration: 1.05, ease: 'power3.out' }, '<')
+    .to(heroVote, { scale: 1, autoAlpha: 1, duration: 0.6, ease: 'back.out(2)' }, '+=0.22');
 }
 
 initPreloader();
@@ -197,23 +255,134 @@ galleryLightbox?.addEventListener('close', () => {
   }
 });
 
-/* ---------- Fullscreen-Menü (mobil) ---------- */
-const burger = document.querySelector('.topbar__burger');
-const menu = document.querySelector('.menu');
+/* ---------- Menü-Pill ----------
+ * Die Kapsel wächst über echte width/height statt über transform: scale.
+ * Ein Scale müsste beim Schließen hochskalieren und wird dabei unscharf –
+ * hier bleibt jedes Frame pixelscharf. Layout kostet das kaum: die Kapsel
+ * liegt außerhalb des Flusses und das Panel hat eine feste Breite.
+ *
+ * Beim Schließen laufen zuerst die Karten aus („closing"), erst danach
+ * kollabiert die Kapsel – sonst fällt eine noch gefüllte Fläche zusammen.
+ */
+const menuToggle = document.querySelector('.menu-pill__toggle');
+const menuPanel = document.querySelector('.menu-pill__panel');
+const menuBackdrop = document.querySelector('.menu-pill__backdrop');
+const menuShell = document.querySelector('.menu-pill__shell');
+const MENU_OUTRO = 0.2;
+let menuTween = null;
+let menuOutro = null;
 
-function setMenu(open) {
-  if (!burger) return;
-  document.documentElement.dataset.menu = open ? 'open' : '';
-  burger.setAttribute('aria-expanded', String(open));
-  burger.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+const prefersReducedMotion = () =>
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function resizeMenuShell(applyState, duration, ease) {
+  const fromWidth = menuShell.offsetWidth;
+  const fromHeight = menuShell.offsetHeight;
+
+  menuTween?.kill();
+  gsap.set(menuShell, { clearProps: 'width,height' });
+  applyState();
+
+  if (prefersReducedMotion()) return;
+
+  menuTween = gsap.fromTo(
+    menuShell,
+    { width: fromWidth, height: fromHeight },
+    {
+      width: menuShell.offsetWidth,
+      height: menuShell.offsetHeight,
+      duration,
+      ease,
+      clearProps: 'width,height',
+    },
+  );
 }
 
-burger?.addEventListener('click', () => {
+function setMenu(open) {
+  if (!menuToggle || !menuPanel || !menuShell) return;
+
+  const state = document.documentElement.dataset.menu || '';
+  if (open === (state === 'open')) return;
+
+  menuOutro?.kill();
+  menuToggle.setAttribute('aria-expanded', String(open));
+  menuToggle.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
+  menuPanel.toggleAttribute('inert', !open);
+
+  if (open) {
+    resizeMenuShell(
+      () => {
+        document.documentElement.dataset.menu = 'open';
+        menuPanel.scrollTop = 0;
+      },
+      0.58,
+      'menuInflate',
+    );
+    return;
+  }
+
+  const collapse = () =>
+    resizeMenuShell(
+      () => {
+        document.documentElement.dataset.menu = '';
+      },
+      0.46,
+      'menuDeflate',
+    );
+
+  if (prefersReducedMotion()) {
+    collapse();
+    return;
+  }
+
+  document.documentElement.dataset.menu = 'closing';
+  menuOutro = gsap.delayedCall(MENU_OUTRO, collapse);
+}
+
+menuToggle?.addEventListener('click', () => {
   setMenu(document.documentElement.dataset.menu !== 'open');
 });
 
-menu?.addEventListener('click', (event) => {
-  if (event.target.closest('a')) setMenu(false);
+menuBackdrop?.addEventListener('click', () => setMenu(false));
+
+/* ---------- Smooth Scroll für Ankerlinks ----------
+ * Über GSAP statt scroll-behavior: smooth, weil native Smooth-Scrolls
+ * mit den ScrollTrigger-Scrubs kollidieren.
+ */
+function smoothScrollTo(target) {
+  if (prefersReducedMotion()) {
+    target.scrollIntoView();
+    return;
+  }
+
+  gsap.to(window, {
+    scrollTo: { y: target, autoKill: true },
+    duration: 1.1,
+    ease: 'power2.inOut',
+    overwrite: 'auto',
+  });
+}
+
+document.addEventListener('click', (event) => {
+  const link = event.target.closest?.('a[href^="#"]');
+  if (!link) return;
+
+  const hash = link.getAttribute('href');
+  if (!hash || hash === '#') return;
+
+  const target = document.querySelector(hash);
+  if (!target) return;
+
+  event.preventDefault();
+  history.pushState(null, '', hash);
+
+  if (link.closest('.menu-pill__panel')) {
+    setMenu(false);
+    gsap.delayedCall(MENU_OUTRO, () => smoothScrollTo(target));
+    return;
+  }
+
+  smoothScrollTo(target);
 });
 
 document.addEventListener('keydown', (event) => {
@@ -285,24 +454,6 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
     });
   });
 
-  /* Stat-Zahlen: scroll-getrieben, später und langsamer */
-  const statsSection = document.querySelector('.person__stats');
-  const nums = $$('.stat__num');
-  if (statsSection && nums.length) {
-    gsap.set(nums, { yPercent: 110 });
-    const statsTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: statsSection,
-        start: 'top 58%',
-        end: 'top 12%',
-        scrub: true,
-      },
-    });
-    nums.forEach((num, i) => {
-      statsTl.to(num, { yPercent: 0, ease: 'none', duration: 0.32 }, 0.24 + i * 0.15);
-    });
-  }
-
   /* Band: Container 100vw×100svh, skaliert von klein auf exakt Vollbild */
   const bandWrap = document.querySelector('.band-wrap');
   const band = document.querySelector('.band');
@@ -367,7 +518,7 @@ mm.add('(min-width: 761px) and (prefers-reduced-motion: no-preference)', () => {
 
     $$('.goals__item').forEach((item) => {
       item.addEventListener('mouseenter', () => {
-        const src = item.dataset.img;
+        const src = item.dataset.hoverSrc;
         if (src) floaterImg.src = src;
         gsap.to(floater, { autoAlpha: 1, scale: 1, duration: 0.22, ease: 'power2.out' });
       });
