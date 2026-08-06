@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2c2c2c"/>
+      <stop offset="1" stop-color="#0d0d0d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="800" fill="url(#g)"/>
+  <text x="50%" y="53%" fill="#e9e7e2" font-family="Arial, Helvetica, sans-serif" font-size="280" font-weight="800" text-anchor="middle" dominant-baseline="middle">JH</text>
+  <text x="50%" y="90%" fill="#8f8d88" font-family="Arial, Helvetica, sans-serif" font-size="26" letter-spacing="6" text-anchor="middle">PLATZHALTER — EIGENES FOTO ALS public/portrait.jpg EINSETZEN</text>
+</svg>

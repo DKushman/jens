@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="700" viewBox="0 0 1600 700">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a3a38"/>
+      <stop offset="1" stop-color="#1c1c1a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="700" fill="url(#sky)"/>
+  <g fill="#2c2c2a">
+    <rect x="80" y="260" width="180" height="440"/>
+    <rect x="300" y="180" width="220" height="520"/>
+    <rect x="560" y="300" width="160" height="400"/>
+    <rect x="760" y="220" width="240" height="480"/>
+    <rect x="1040" y="280" width="180" height="420"/>
+    <rect x="1260" y="200" width="260" height="500"/>
+  </g>
+  <text x="50%" y="90%" fill="#8f8d88" font-family="Arial, Helvetica, sans-serif" font-size="26" letter-spacing="6" text-anchor="middle">PLATZHALTER — KIEZ-FOTO ALS public/kiez.webp EINSETZEN</text>
+</svg>
