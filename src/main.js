@@ -5,7 +5,7 @@
  * – Nur transform + opacity (Compositor, keine Layout-Thrashing)
  * – Kein clip-path, kein filter-Animate, kein rotationX / 3D
  * – Entrance-Reveals: once:true → Trigger entfernt sich danach selbst
- * – scrub für Band + Slabs + Werdegang
+ * – scrub für Slabs + Werdegang; Band: GSAP transform (browserübergreifend)
  * – Galerie Desktop: scrub Einflug links/rechts, bleibt sichtbar (transform + opacity)
  * – Hero-Intro + Marquee bleiben reines CSS
  */
@@ -17,8 +17,6 @@ import goals from './data/goals.json';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, CustomEase);
 CustomEase.create('reveal', 'M0,0 C0.77,0 0.175,1 1,1');
-CustomEase.create('menuInflate', 'M0,0 C0.22,1 0.36,1 1,1');
-CustomEase.create('menuDeflate', 'M0,0 C0.45,0 0.15,1 1,1');
 ScrollTrigger.config({ limitCallbacks: true });
 
 /* ---------- Zahlen: einmaliger Reveal per Intersection Observer ---------- */
@@ -38,9 +36,9 @@ function initStatsReveal() {
       observer.disconnect();
     },
     {
-      threshold: 0,
-      /* Später triggern – Sektion erst sichtbar, dann Zahlen rein */
-      rootMargin: '0px 0px -8% 0px',
+      threshold: 0.15,
+      /* Später triggern – Zahlen erst wenn die Sektion weiter im Viewport ist */
+      rootMargin: '0px 0px -28% 0px',
     },
   );
 
@@ -69,6 +67,43 @@ function initGoalsImages() {
 }
 
 initGoalsImages();
+
+function initImageNumbers() {
+  const skipRoot = '.preloader, .gallery-lightbox, .goals__floater';
+  const imgs = [...document.querySelectorAll('.site img')].filter((img) => {
+    if (img.closest(skipRoot)) return false;
+    if (img.classList.contains('map__base') || img.classList.contains('preloader__sig-img')) return false;
+    if (img.closest('.bento-row__media--icon')) return false;
+
+    const src = img.getAttribute('src') || '';
+    if (!src || src.endsWith('.svg')) return false;
+
+    return true;
+  });
+
+  imgs.forEach((img, i) => {
+    const host =
+      img.closest('figure') ||
+      img.closest('.hero__frame') ||
+      img.closest('.band') ||
+      img.parentElement;
+    if (!host) return;
+
+    host.classList.add('img-index');
+
+    let badge = host.querySelector(':scope > .img-index__badge');
+    if (!badge) {
+      badge = document.createElement('span');
+      badge.className = 'img-index__badge';
+      badge.setAttribute('aria-hidden', 'true');
+      host.appendChild(badge);
+    }
+
+    badge.textContent = String(i + 1);
+  });
+}
+
+initImageNumbers();
 
 /* ---------- Preloader → Hero-Intro ---------- */
 function enablePageInteraction(preloader) {
@@ -136,7 +171,7 @@ function initPreloader() {
 
   tl.to(line, { scaleX: 1, duration: 0.45, ease: 'power2.inOut' })
     .to(letters, { yPercent: 0, duration: 0.4, stagger: 0.038, ease: 'power3.out' }, '-=0.12')
-    .to(sigWrap, { clipPath: 'inset(0 0% 0 0)', duration: 1.05, ease: 'none' }, '-=0.05')
+    .to(sigWrap, { clipPath: 'inset(0 0% 0 0)', duration: 1.75, ease: 'none' }, '-=0.05')
     .to({}, { duration: 0.1 })
     .to(inner, { y: 60, autoAlpha: 0, duration: 0.42, ease: 'power2.in' })
     .to(
@@ -255,88 +290,23 @@ galleryLightbox?.addEventListener('close', () => {
   }
 });
 
-/* ---------- Menü-Pill ----------
- * Die Kapsel wächst über echte width/height statt über transform: scale.
- * Ein Scale müsste beim Schließen hochskalieren und wird dabei unscharf –
- * hier bleibt jedes Frame pixelscharf. Layout kostet das kaum: die Kapsel
- * liegt außerhalb des Flusses und das Panel hat eine feste Breite.
- *
- * Beim Schließen laufen zuerst die Karten aus („closing"), erst danach
- * kollabiert die Kapsel – sonst fällt eine noch gefüllte Fläche zusammen.
- */
+/* ---------- Menü: nur data-menu toggeln, Animationen rein in CSS ---------- */
 const menuToggle = document.querySelector('.menu-pill__toggle');
 const menuPanel = document.querySelector('.menu-pill__panel');
 const menuBackdrop = document.querySelector('.menu-pill__backdrop');
-const menuShell = document.querySelector('.menu-pill__shell');
-const MENU_OUTRO = 0.2;
-let menuTween = null;
-let menuOutro = null;
-
-const prefersReducedMotion = () =>
-  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-function resizeMenuShell(applyState, duration, ease) {
-  const fromWidth = menuShell.offsetWidth;
-  const fromHeight = menuShell.offsetHeight;
-
-  menuTween?.kill();
-  gsap.set(menuShell, { clearProps: 'width,height' });
-  applyState();
-
-  if (prefersReducedMotion()) return;
-
-  menuTween = gsap.fromTo(
-    menuShell,
-    { width: fromWidth, height: fromHeight },
-    {
-      width: menuShell.offsetWidth,
-      height: menuShell.offsetHeight,
-      duration,
-      ease,
-      clearProps: 'width,height',
-    },
-  );
-}
+const MENU_OUTRO = 300;
 
 function setMenu(open) {
-  if (!menuToggle || !menuPanel || !menuShell) return;
+  if (!menuToggle || !menuPanel) return;
 
-  const state = document.documentElement.dataset.menu || '';
-  if (open === (state === 'open')) return;
+  const isOpen = document.documentElement.dataset.menu === 'open';
+  if (open === isOpen) return;
 
-  menuOutro?.kill();
+  document.documentElement.dataset.menu = open ? 'open' : '';
   menuToggle.setAttribute('aria-expanded', String(open));
   menuToggle.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
   menuPanel.toggleAttribute('inert', !open);
-
-  if (open) {
-    resizeMenuShell(
-      () => {
-        document.documentElement.dataset.menu = 'open';
-        menuPanel.scrollTop = 0;
-      },
-      0.58,
-      'menuInflate',
-    );
-    return;
-  }
-
-  const collapse = () =>
-    resizeMenuShell(
-      () => {
-        document.documentElement.dataset.menu = '';
-      },
-      0.46,
-      'menuDeflate',
-    );
-
-  if (prefersReducedMotion()) {
-    collapse();
-    return;
-  }
-
-  document.documentElement.dataset.menu = 'closing';
-  menuOutro = gsap.delayedCall(MENU_OUTRO, collapse);
+  if (open) menuPanel.scrollTop = 0;
 }
 
 menuToggle?.addEventListener('click', () => {
@@ -378,7 +348,7 @@ document.addEventListener('click', (event) => {
 
   if (link.closest('.menu-pill__panel')) {
     setMenu(false);
-    gsap.delayedCall(MENU_OUTRO, () => smoothScrollTo(target));
+    window.setTimeout(() => smoothScrollTo(target), MENU_OUTRO);
     return;
   }
 
@@ -454,41 +424,48 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
     });
   });
 
-  /* Band: Container 100vw×100svh, skaliert von klein auf exakt Vollbild */
+  /* Band: nur transform auf .band — kein Bild-Parallax (performant, cross-browser) */
   const bandWrap = document.querySelector('.band-wrap');
   const band = document.querySelector('.band');
   if (bandWrap && band) {
-    gsap.fromTo(band, { scale: 0.12 }, {
-      scale: 1,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: bandWrap,
-        start: 'top bottom',
-        end: 'top top',
-        scrub: true,
-        invalidateOnRefresh: true,
-      },
-    });
+    const bandMobile = window.matchMedia('(max-width: 760px)');
 
-    const bandImg = band.querySelector('img');
-    if (bandImg) {
-      gsap.fromTo(bandImg, { yPercent: -4 }, {
-        yPercent: 4, ease: 'none',
-        scrollTrigger: { trigger: bandWrap, start: 'top bottom', end: 'bottom top', scrub: true },
+    if (bandMobile.matches) {
+      gsap.fromTo(band, { scale: 0.14, force3D: true }, {
+        scale: 1,
+        duration: 0.95,
+        ease: 'power2.out',
+        scrollTrigger: once(bandWrap, 'top 90%'),
+      });
+    } else {
+      gsap.fromTo(band, { scale: 0.14, force3D: true }, {
+        scale: 1,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: bandWrap,
+          start: 'top bottom',
+          end: 'top top',
+          scrub: 0.45,
+          fastScrollEnd: true,
+          invalidateOnRefresh: true,
+        },
       });
     }
   }
 
-  /* Bento: exakt wie Hero (window-open + img-settle), scroll-getriggert */
-  $$('.bento__frame').forEach((frame) => {
-    ScrollTrigger.create({
-      trigger: frame,
-      start: 'top 92%',
-      once: true,
-      onEnter: () => frame.classList.add('is-open'),
+  /* Bento: nur Überschrift — Zeilen sticky per CSS */
+  const bentoSechead = document.querySelector('.bento__sechead');
+  if (bentoSechead) {
+    gsap.fromTo(bentoSechead, { autoAlpha: 0, y: 28 }, {
+      autoAlpha: 1, y: 0, duration: 0.65, ease: 'power2.out',
+      scrollTrigger: once(bentoSechead, 'top 88%'),
     });
-  });
+  }
 
+  return () => {};
+});
+
+mm.add('(min-width: 761px) and (prefers-reduced-motion: no-preference)', () => {
   $$('.slab:not(.goals)').forEach((section) => {
     const bg = section.querySelector('.slab__bg');
     if (!bg) return;
@@ -497,8 +474,6 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
       scrollTrigger: { trigger: section, start: 'top bottom', end: 'top 50%', scrub: true },
     });
   });
-
-  return () => {};
 });
 
 mm.add('(min-width: 761px) and (prefers-reduced-motion: no-preference)', () => {
